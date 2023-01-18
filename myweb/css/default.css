@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    min-width: 500px;
+    width: 100%;
+}
+
+
+.wrap {
+    background-color: rgb(178, 200, 178);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 10px 10px;
+    position: relative;
+    margin: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+
+/*logo*/
+.logo {
+    margin-left: 100px;
+}
+
+.logo i {
+    font-size: 40px;
+    color:  rgb(87, 142, 87);
+    /* opacity: 0.8; */
+}
+
+.logo a {
+    font-size: 1.5em;
+    color: gray;
+    letter-spacing: 3px;    
+    text-decoration: none;
+}
+
+.logo a:hover {
+    color: green;
+}
+
+
+/*menu*/
+.menu > li {
+    background-color: white;
+    color: black;
+    padding: 16px;
+    font-size:1.1em;
+    border: none;
+    cursor: pointer;
+}
+
+.menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu > li {
+    list-style: none;
+}
+
+.menu > li > a {
+    text-decoration: none;
+    color: black;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    min-width: 130px;
+    padding: 0px;
+    font-size: 1.1em;
+    padding-left: 10px;
+}
+
+.submenu > li {
+    list-style: none;
+}
+
+.submenu > li > a {
+    text-decoration: none;
+    color: black;
+}
+
+.menu a:hover {
+    color: green;
+    text-decoration: underline;
+}
+
+
+.menu:hover .submenu{
+    display: block;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+/*login join*/
+.loginjoin {
+    margin-right: 100px;
+    font-size: 1.0em;
+}
+
+.loginjoin a {
+    text-decoration: none;
+    list-style: none;
+    color: rgb(113, 112, 112);
+}
+
+.loginjoin a:hover {
+    color: green;
+}
+
+.sticky {
+    position: fixed;
+    width: 100%;
+}
+
+
+
+.notice {
+    background-color: rgb(165, 165, 165);
+    color: white;
+    padding: 30px;
+    margin-top: 130px;
+}
+
+.information {
+    display: inline-block;
+    width: 100%;
+    background-color: rgb(243, 243, 243);
+
+}
+
+.information p {
+    padding: 30px;
+    width: 50%;
+    float: left;
+}
+
+.information .sns {    
+    float: right;
+    text-align: right;
+    padding: 30px;
+    width: 50%;
+}
+
+.information svg {
+    margin: 0 5px;
+}

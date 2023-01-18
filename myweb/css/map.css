@@ -1,0 +1,40 @@
+.all {
+    padding-bottom: 600px;
+}
+
+main {
+    width: 65%;
+    margin: 0 auto;
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 5px;
+}
+
+.home {
+    padding: 20px 0 0 12%;
+}
+
+.content h4 {
+    margin: 10px 0 0 70px; 
+}
+
+.content .text {
+    margin: 30px 0 0 80px; 
+}
+
+.content .text a {
+    color: black;
+    text-decoration: underline;
+}
+
+.content .text a:hover {
+    cursor: pointer;
+    color: rgb(86, 86, 86);
+}
+#googleMap {
+    margin-top: 30px;
+}
+

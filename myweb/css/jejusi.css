@@ -1,0 +1,301 @@
+
+*{
+    box-sizing: border-box;
+}
+
+body {    
+
+    margin-bottom: 0;
+
+}
+
+.wrap {
+    background-color: white;
+    padding: 13px;
+    text-align: center;
+}  
+
+.logo {
+    margin-left: 100px;
+    float: left;
+}
+
+.logo i {
+    font-size: 40px;
+    color:  rgb(87, 142, 87);
+    /* opacity: 0.8; */
+}
+
+.logo a {
+    font-size: 1.5em;
+    color: gray;
+    letter-spacing: 3px;    
+    text-decoration: none;
+}
+
+.logo a:hover {
+    color: green;
+}
+
+.wrap #con {
+    text-align: center;
+    display:inline-block;
+}
+
+.wrap #con .touchmain {
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    font-size: 1.1em;
+    /* float: left; */
+    text-align: center;
+    margin: 0 50px;
+}
+
+#con {
+    text-align: center;
+}
+
+.fa:hover {
+    color: rgb(0, 86, 0);
+    cursor: pointer;
+}
+
+#con a {
+    text-decoration: none;
+    color: black;
+}
+
+#con .touchmain {
+    display:inline-block;
+}
+
+#con .touchmain:hover {
+    color: green;
+    /* text-decoration: underline; */
+}
+
+#con .touchmain a:hover {
+    color: green;
+    text-decoration: underline;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    min-width: 70%;
+    padding: 0px;
+    font-size: 1.1em;
+}
+
+
+.wrap .icon {
+    display: none;
+}
+
+
+@media screen and (max-width: 600px)  {
+    .wrap #con .touchmain {display: none;}
+    .wrap .icon {
+        display: block;
+        float: right;
+        margin: 10px 10px 0 0;
+        color: green;
+        
+    }
+    .wrap .logo a {
+        display: block;
+    }
+
+    .loginjoin {display: none;}
+
+    .logo {
+        margin: 0 0 20px 20px;
+    }
+}
+
+
+#light {
+    position: fixed;  
+    width:100%; 
+    height:100%;  
+    background-color:rgba(0,0,0,0.7);  
+    top:0;  
+    left:0; 
+    display:none; 
+}
+
+#light img {
+    position:absolute;  
+    top:40%; 
+    left:40%;  
+    border:5px solid #eee;     
+}
+
+
+
+
+
+#menuvar.responsive {position: relative;}
+
+#menuvar.responsive .touchmain {
+  display: block;
+  text-align: left;
+}
+
+#menuvar.responsive .icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+
+.loginjoin {
+    padding: 12px;
+}
+
+
+
+.home {
+    width: 90%;
+    padding: 20px 19%;
+    margin: 0 auto;  
+}
+
+.main {
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+    height: 100%;
+}
+
+
+.imgs:not(:first-child) {
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.imgs img {
+    margin: 20px 30px;
+}
+
+.loginjoin {
+    margin-right: 5%;
+    font-size: 1.0em;
+    float: right;
+}
+
+.loginjoin a {
+    text-decoration: none;
+    list-style: none;
+    color: rgb(113, 112, 112);
+}
+
+.loginjoin a:hover {
+    color: green;
+}
+
+.sticky {
+    position: fixed;
+    width: 100%;
+}
+
+.touchmain {
+    position: relative;
+
+}
+/* 
+.touch .submenu {
+    background-color: white;
+    position: absolute;
+    top: 40;
+    left: 0;
+    display: none;
+    z-index: 5;   
+}
+
+.touch .submenu a {
+    color: white;
+    text-align: center;
+}
+
+.touch:hover .submenu {
+    display: block;
+} */
+
+.touchsub {
+    display: none;
+}
+
+.touchmain:hover .touchsub{
+    display: block;
+}
+
+
+
+.main .title {
+    border: 1px solid rgba(0, 128, 0, 0.152);
+    width: 60%;
+    margin: 40px auto;
+    text-align: left;
+    padding: 20px 0 20px 20px;
+    font-size: 1.3em;
+}
+
+.container {
+    /* border: 1px solid red; */
+    display: flex;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.container .album{
+    /* border: 1px solid red; */
+    margin: 50px;
+    padding: 50px;
+    text-align: center;
+    margin: 0 auto;
+    align-items: center;
+}
+
+
+
+
+footer {
+    width: 100%;
+}
+
+
+.notice {
+    border: 1px solid black;
+    background-color: rgb(165, 165, 165);
+    color: white;
+    padding: 30px;
+    margin-top: 130px;
+}
+
+.information {
+    display: inline-block;
+    width: 100%;
+    background-color: rgb(243, 243, 243);
+}
+
+.information p {
+    padding: 30px;
+    /* width: 50%; */
+    float: left;
+}
+
+.information .sns {    
+    float: right;
+    text-align: right;
+    padding: 30px;
+    /* width: 50%; */
+}
+
+.information svg {
+    margin: 0 5px;
+}
+
