@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>jQuery + AJAX</title>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+
+#frame1 {
+	width: 100%;
+	height: 200px;
+}
+
+</style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+// $(selector).serialize()
+//   ↑
+//   form 의 value 들을 모아서 URL에 사용 가능한 query string 을 자동적으로 만듬
+//   이를 사용하여 AJAX request 가능.
+
+//  ※ 아래 예제는 CORS 문제로 크롬에선 실행 안됨
+
+var url = "http://httpbin.org"; //request 정보에 대한 내용을 확인할 수 있는 서비스
+
+$(document).ready(function(){
+  $("#btn01").click(function(){
+    // TODO.
+    $("#result").text($("#frm1").serialize());   //form에 아이디 줌 결과 나옴
+
+  }); //이거 값 뭐 나왔지 다시 보기
+  
+  $("#btn02").click(function(){
+	// TODO	  
+  //serialize()를 안쓰면? url 하나하나 다 직접 입력해야 함
+  // let firstName = $("[name='FirstName']").val();
+  // let lastName = $("[name='LastName']").val();
+  let reqUrl;
+  // reqUrl = url + "?Firstname=" + firstName + "&lastname=" + lastName;
+  // alert(reqUrl);
+
+  reqUrl = url + "/get?" + $("#frm1").serialize(); //utl?쿼리스트링. 더 간단하게 만들어짐
+  // alert(reqUrl);
+
+  //response는 html, 저 url 입력하면 뜨는 것들이
+
+
+  //get 방식
+  $.ajax({
+    url: reqUrl,
+    type: "GET",
+    cache: false,
+    success: function(data, status/*, xhr*/) { //이미 자바스크립트로 변환되어 object로 나옴. json보고 싶으면 세번째 매개변수로 xhr 넣기
+      if(status == "success") {
+      alert(data); //json이면 알아서 자바스크립트로, xml은 xmldom으로 알아서 변환되는데 이건? 아무 반응이 없음
+     // alert(xhr.responseText); json으로 나옴
+      }
+    }
+  })
+
+
+
+
+  });
+
+  //post 방식
+  
+  $("#btn03").click(function(){
+	// TODO	  
+    var reqUrl = url + "/post";
+    $.ajax({
+      url: reqUrl,
+      type: "POST",
+      cache: false,
+
+      //post 방식으로 보낼 data
+      //query string, object.. 등의 형태로 보낼 수 있다
+
+      //폼에 있는 걸 쿼리스트링으로 보내는 게 serialize()
+      // data: $("#frm1").serialize(),  //post일 땐 입력. query string로 보내는 방법
+      data: { //object 형식으로 data 보냄
+        FirstName: $("[name='FirstName']").val(),
+        LastName: $("[name='LastName']").val(),
+      },
+
+      //그 다음 리퀘스트 성공적으로 보내고
+      success: function(data, status, xhr) {
+        if(status == "success") {
+          alert(xhr.responseText)
+        }
+      }
+    })
+
+
+
+  });
+});
+</script>
+<body>
+<h2>serialize()</h2>
+
+<form id="frm1" action="">
+  First name: <input type="text" name="FirstName" value="Mickey"><br>
+  Last name: <input type="text" name="LastName" value="Mouse"><br>
+</form>
+
+<button id="btn01">Serialize form values</button>
+<button id="btn02">get</button>
+<button id="btn03">post</button>
+
+<div id="result"></div>
+<hr>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

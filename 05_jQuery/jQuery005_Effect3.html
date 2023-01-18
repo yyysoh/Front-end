@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>stop()</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script> 
+
+// $(selector).stop(stopAll,goToEnd);
+
+// stopAll : 애니메이션 queue 가 clear 되는지 여부, 
+//			디폴트값은 false, 즉 중간에 stop 되면 현재 애니메이션만 중단되고 다음 애니메이션이 진행 
+// goToEnd : stop() 될때 곧바로 애니메이션의 끝 상태로.  디폴트 값은 false
+
+$(document).ready(function(){
+	
+	// #start 버튼을 누르면 다음 애니메이션이 '차례대로' 진행
+	// 1. 사각형이 오른쪽으로 100px 움직이고 (5초)
+	// 2. 글자 크기가 3em 으로 커지게 하기 (5초)
+	$("#start").click(function(){
+		$("div").animate({left: '100px'}, 5000);
+        $("div").animate({fontSize: '3em'}, 5000);
+ 
+
+	});
+	
+	$("#stop").click(function(){
+		$("div").stop(); //애니메이션 중 멈추면 그 때 수행하던 애니메이션만 멈춘다. 움직이는 거 멈추면 글자가 커짐
+		// 매개변수 없을 떄 stop은 현재 진행중인 애니메이션만 종료
+        // 애니메이션 큐에 남아있는 애니메이션이 있었다면 다음 애니메이션이 진행된다
+ 
+
+	});
+	
+	$("#stopAll").click(function(){
+		$("div").stop(true); //애니메이션 큐에 모든 애니메이션을 종료한다 멈추는 것도 글자 커지는 것도
+	});
+
+ 	// 첫번째 anim중 stop() 하면? 아래 각각의 경우는?
+	$("#stopButFinish").click(function(){
+		// $(selector).stop(stopAll,goToEnd)
+		$("div").stop(false, true); //이동할 때 하면 끝으로 간 후에 글자가 커진다 지금 이동하는 것만 멈춰짐 그 후 애니메이션은 동작
+		//$("div").stop(true, true); //큐가 지워졌으니까 그 상태에서 끝으로
+		
+	});		
+	
+});
+</script> 
+</head>
+<body>
+
+<button id="start">Start</button>
+<button id="stop">Stop</button>
+<button id="stopAll">Stop all</button>
+<button id="stopButFinish">Stop but finish</button>
+
+
+<div style="background:#98bf21;height:100px;width:200px;position:absolute;">HELLO</div>
+
+</body>
+</html>

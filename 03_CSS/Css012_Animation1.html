@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Animation</title>
+<!-- 
+	CSS 애니메이션 관련 참조
+	transition : https://www.w3schools.com/css/css3_transitions.asp
+	2D transform : https://www.w3schools.com/css/css3_2dtransforms.asp
+	3D transform : https://www.w3schools.com/css/css3_3dtransforms.asp
+	animations : https://www.w3schools.com/css/css3_animations.asp
+
+
+	수치화된 것들은 전부 애니메이션화가 된다
+ -->
+<style> 
+div {
+    width: 100px;
+    height: 100px;
+}
+
+div#box1 {
+    background: red;
+
+	/* TODO */
+	transition: width 2s, height 1s; 
+	/*width값 변화 발생 시 2초에 걸쳐 진행. 이게 애니메이션 점진적으로 바뀌는*/
+	/*수치화된 건 transition 걸 수 있다?*/
+}
+
+div#box1:hover { /*마우스 올리면 가로 늘어남 원래는 100. width property가 바뀜*/
+
+	/* TODO */
+	width: 300px;
+	height: 300px; /*transition 안하니 확 커지고 걸어둔건 천천히 움직임*/
+
+}
+
+div#box2 {
+	background-color: blue;
+
+	/* TODO */
+	/* transition: transform 2s, width 2s, height 2s, background-color 2s; */
+	transition: all 2s; /*모든 property에 대해 2초동안 동작*/
+
+}
+
+div#box2:hover{
+
+	/* TODO */
+	width: 200px;
+	height: 200px;
+	background-color: yellow; /*색상도 수치*/
+	/* transform: rotate(110deg) ; 110도 */
+	transform: skewX(20deg); 
+
+}
+/*  transform : 관련 값
+	translate()  <-- 위치 이동
+	rotate()  <-- 회전값
+	scale()  <-- 크기
+	skewX()  <-- x축 찌그러트리기
+	skewY()  <-- Y축 찌그러트리기
+	matrix()  <-- 좌표변환값.
+*/
+
+div#box3{
+	background-color: green;
+	/* TODO */
+	transition: margin-left 2s; /*margin 이라고 써도 됨*/
+
+}
+
+div#box3:hover{
+	/* TODO */
+	margin-left: 100px; /*왼쪽에 100px 공백, 오른쪽으로 이동*/
+}
+
+</style>
+
+</head>
+<body>
+<h1>The transition Property</h1>
+
+<p>#box1 마우스를 올려보세요</p>
+<div id="box1"></div>
+
+<hr>
+
+<p>#box2 마우스를 올려보세요</p>
+<div id="box2"></div>
+
+<hr>
+
+<p>#box3 마우스를 올려보세요</p>
+<div id="box3"></div>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

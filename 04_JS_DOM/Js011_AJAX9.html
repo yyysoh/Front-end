@@ -1,0 +1,228 @@
+<!--
+■ 영화진흥위원회 : 일별 박스 오피스
+http://www.kobis.or.kr/kobisopenapi/homepg/apiservice/searchServiceInfo.do
+ 
+http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.xml  (XML)
+http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json  (JSON)
+    key : (발급키)
+    targetDt : (날짜yyyyMMdd)
+    multiMovieYn : 영화구분,  "Y" : 다양성 영화 "N" : 상업영화 (default : 전체)
+    repNationCd : 국내국외영화구분, "K": 한국영화 "F" : 외국영화 (default : 전체)
+    itemPerPage : 결과 row 의 개수 (default : "10", 최대 : "10")
+   
+샘플url
+ 
+XML 버젼
+http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.xml?key=f5eef3421c602c6cb7ea224104795888&targetDt=20120101
+ 
+JSON 버젼
+http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20120101
+ 
+
+
+--------
+
+?key=584a4b42986e9e517d8ab5052664aebd&targetDt=2022-08-03 
+?key=584a4b42986e9e517d8ab5052664aebd&targetDt=20120101 - 이런 url이어야하는데 날짜 - 때메 안됨 그럼 input date로 못하나..?
+ 
+-->
+
+
+ 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>영화목록조회 - 영화진흥위원회</title>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+</head>
+
+
+<body>
+    <h1>일별박스오피스</h1>
+    <form name="frm">
+    날짜: <input type="number" name="targetDt"><br> <!--date 확인!!!-->
+    영화구분: <select name="multiMovieYn">
+            <option value="default" selected>전체</option>
+            <option value="Y">다양성</option>
+            <option value="N">상업</option>
+            </select><br>
+    국내국외영화구분: <select name="repNationCd">
+            <option value="default" selected>전체</option>
+            <option value="K">한국</option>
+            <option value="F">외국</option>
+            </select><br>
+    출력ROW : <input type="number" value="10" name="itemPerPage"><br>
+  
+    <br><br>
+    
+    <button type="button" onclick="loadData()">정보 가져오기</button>
+    <button type="button" onclick="removeTable()">지우기</button>
+    </form>
+    
+    <hr>
+
+    <h2>검색결과</h2>
+
+    <table id="demo"></table>
+        
+
+<script> //json으로!
+
+
+let key = "584a4b42986e9e517d8ab5052664aebd"; 
+let req_url = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+
+
+function loadData() {
+
+    let frm = document.forms['frm'];
+    
+    //유효성 검사
+
+
+    let targetDt = frm.targetDt.value.trim();
+    let targetDtPat = /([0-2][0-9]{3}[0-1][0-9][0-3][0-9])/;
+	if(!targetDtPat.test(targetDt)) { 
+		alert("날짜 포맷이 맞지 않습니다");
+		frm.targetDt.focus();
+		return;
+	}
+
+    let itemPerPage = frm.itemPerPage.value.trim();
+    if(isNaN(itemPerPage) || itemPerPage < 0 || itemPerPage > 10) {
+        alert('출력ROW는 1~10 사이의 정수이어야 합니다');
+        frm.itemPerPage.focus();
+        return;
+    }
+
+
+	// JSON
+    let xhttp, url;
+
+    url = `${req_url}?key=${key}`
+			+ `&targetDt=${targetDt}`
+			+ `&multiMovieYn=${multiMovieYn}`
+			+ `&repNationCd=${repNationCd}`
+			+ `&number=${number}`
+			;
+
+	//document.getElementById('demo').innerHTML = url;
+
+
+    xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200) {
+			//alert(this.responseText);
+			parseJSON(JSON.parse(this.responseText));  //왜ㅐ...
+        }
+    }
+
+	xhttp.open("GET", url, true);
+	xhttp.send();
+
+}
+
+
+function parseJSON(jsonObj){
+
+let table = [];
+table.push("<tr><td>순위</td><td>영화명</td><td>누적관객수</td><td>전일대비순위증감</td></tr>");
+
+//TODO
+for(e of jsonObj.boxOfficeResult.dailyBoxOfficeList.dailyBoxOffice){
+    table.push(`
+    <tr>
+        <td>${e.rank}</td>
+        <td>${e.movieNm}</td>
+        <td>${e.audiAcc}</td>
+        <td>${e.rankInten}</td> 
+
+    </tr>
+    `)
+};
+document.getElementById('demo').innerHTML = table.join('\n');
+}
+
+function removeTable(){
+	document.getElementById('demo').innerHTML= "";
+}
+
+    
+
+ 
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

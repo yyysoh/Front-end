@@ -1,0 +1,145 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Responsive Top Navigation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+	margin:0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  color: #f2f2f2; /* 글자색 */
+  text-decoration: none; /* <a> 태그 기본스타일 제거 */
+  font-size: 17px; /* 글자크기 */
+  text-align: center;  /* 중앙 정렬 */
+  padding: 14px 16px;  /* 내부 여백 */
+  float: left;  /* float 좌 정렬 */			
+  display: block; /* block */  
+}
+
+.topnav a:hover { /* 마우스 올라갔을때 색상 */
+  background-color: #ddd;
+  color: black;
+}
+ 
+.topnav a.active { /* 현재 메뉴 색상 */
+  background-color: #4CAF50;
+  color: white;
+}
+ 
+.topnav .icon {  /* 햄버거 아이콘 일단 안보이게 하기 */
+  display: none;
+}
+
+@media screen and (max-width: 600px){
+  /* 첫번째 a 외에는 전부 안보이게 하기 */
+  .topnav  a:not(:first-child) {display: none}
+
+  /* 햄버거 아이콘 보이기 */
+  .topnav a.icon {
+    float:right;
+    display: block;
+  }
+}
+
+.topnav.responsive {position: relative}
+
+.topnav.responsive a {
+  float: none;
+  display: block;
+  text-align: left;
+}
+
+/* 햄버거 버튼은 우상단에 고정하려면.. */
+.topnav.responsive .icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="topnav" id="myTopnav">
+  <a href="#home" class="active">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+  	<i class="fa fa-bars"></i>
+  </a>
+  <!-- void(0) 는 undefined 를 리턴함 .  href 가 동작하지 않게 하기 위함.   href="#" 과 동일 -->
+</div>
+
+<div style="padding-left:16px">
+  <h2>Responsive Topnav Example</h2>
+  <p>사이즈를 늘렸다 줄였다 해보자</p>
+</div>
+
+<script>
+function myFunction() {
+	// responsive 클래스를 토글 시킴
+
+	let x = document.getElementById('myTopnav');
+  // alert(x.classList);
+  x.classList.toggle('responsive');
+  // $("#myTopnav").toggleClass("responsive")
+	
+}
+</script>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

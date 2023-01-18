@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>List2</title>
+ 
+<!--li로 많은 걸 할 수 있다!!!-->
+
+
+<style>
+ul {
+    list-style-type: none;
+    background-color: #333333;
+    overflow: hidden;
+}
+
+li {
+    float:left;
+    /*줄바꿈 해줌*/
+}
+
+li a {
+    text-decoration: none; /*a 태그 밑줄 제거*/
+    color: white;
+    padding: 16px; /*벌어짐 여백 네방향으로 패딩 주게 되어있는데 좌우만 줌 블록, 인라인의 차이. 블록은 위아래이나 floating하면 위아래 안됨*/
+    display: block; /*a가 인라인이므로 padding 지정을 위해 block*/
+    text-align: center;
+}
+
+li a:hover { /*a 위에 마우스 올라갔을 때 색깔 변함*/
+    background-color: #111111;
+}
+
+
+</style>
+</head>
+
+
+
+
+<!-- 오늘날 웹에서 li, ol 은 메뉴 작성에도 많이 사용됨. -->
+<body>
+<!--ul>(li>a)*4-->
+
+<ul>
+    <li><a href="https://www.naver.com">네이버</a></li> <!--블록 속성 줄바꿈 됨-->
+    <li><a href="https://www.daum.net">다음</a></li>
+    <li><a href="https://www.nate.com">네이트</a></li>
+    <li><a href="https://www.msn.com">MSN</a></li>
+</ul>
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

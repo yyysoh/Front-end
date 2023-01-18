@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>AJAX API서울시 지하철 역사마스터정보</title>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<!--
+■서울시 지하철 역사마스터 정보
+http://data.seoul.go.kr/dataList/OA-21232/S/1/datasetView.do
+
+샘플url
+
+XML 버젼
+http://openapi.seoul.go.kr:8088/(인증키)/xml/subwayStationMaster/1/5/
+예] http://openapi.seoul.go.kr:8088/4d46796d7366726f3833774a774955/xml/subwayStationMaster/1/5/
+
+
+JSON 버젼
+http://openapi.seoul.go.kr:8088/(인증키)/json/subwayStationMaster/1/5/
+예] http://openapi.seoul.go.kr:8088/4d46796d7366726f3833774a774955/json/subwayStationMaster/1/5/
+ -->
+<body>
+	<h1>서울시 역사 마스터 정보</h1>
+	<form>
+	start: <input type="number" id="start" value="1"/><br>
+	end: <input type="number" id="end" value="5"/><br>
+	
+	<button type="button" id="btn_load">역사정보 가져오기</button>
+	<button type="button" id="btn_remove">지우기</button>
+	</form>
+	<br><br>
+	<h2>AJAX + XML</h2>
+	<table id="demoXML"></table>
+	<hr>
+	<h2>AJAX + JSON</h2>
+	<table id="demoJSON"></table>
+
+
+<script>
+var api_key = "6153744b5979797937365352704674";
+
+
+$(document).ready(function(){
+	 $("#btn_load").click(function(){
+		// 입력정보 가져오기		
+		// TODO
+		var first = $("#start").val().trim();
+		var last = $('#end').val().trim();
+		
+	var url = "http://openapi.seoul.go.kr:8088/" + api_key + "/xml/subwayStationMaster/" + first +  "/" + last;
+
+
+		// XML
+		// TODO
+		$.ajax({  //바로 함수 등장하게 하는 것
+			url: url, //request 보낼 url
+			type: "GET",
+			cache: false,
+			success: function(data, status) { //request 성공 후에 수행하는 함수. data에는 이미 xml parsing된 dom 객체가 담겨온다. status:response text 값
+				if(status == "success") parseXML(data);
+			
+			}
+		})
+
+		// JSON
+		// TODO		
+		url = "http://openapi.seoul.go.kr:8088/" + api_key + "/json/subwayStationMaster/" + first + "/"  + last;
+		$.ajax({ //매개변수는 object 형태로
+			url: url,
+			type: "GET",
+			cache: false,
+			success: function(data, status) { //jQuery의 AJAX에서는 자체적으로 JSON Object로 변환 시켜준 것이기 때문에 그냥 사용
+				if(status == "success") parseJSON(data);
+				
+			}
+		})
+
+	 });
+	 
+	 $("#btn_remove").click(function(){
+		// TODO
+		$("#demoXML").empty();
+		$("#demoJSON").empty();
+	 });
+});
+
+
+function parseXML(xmlDOM) {
+	// TODO
+	const table = [];
+	table.push("<tr><th>역명</th><th>아이디</th><th>호선</th><th>위도</th><th>경도</th></tr>");
+	$(xmlDOM).find("row").each(function() {
+		table.push(`
+		<tr>	
+			<td>${$(this).find("STATN_NM").text()}</td>
+			<td>${$(this).find("STATN_ID").text()}</td>
+			<td>${$(this).find("ROUTE").text()}</td>
+			<td>${$(this).find("CRDNT_X").text()}</td>
+			<td>${$(this).find("CRDNT_Y").text()}</td>
+		</tr>
+		`)
+	})
+	$("#demoXML").html(table.join('\n'));
+}
+
+function parseJSON(jsonObj) {
+	const table = [];
+	table.push("<tr><th>역명</th><th>아이디</th><th>호선</th><th>위도</th><th>경도</th></tr>");
+	for(row of jsonObj.subwayStationMaster.row) {
+		table.push(`
+		<tr>
+			<td>${row.STATN_NM}</td>
+			<td>${row.STATN_ID}</td>
+			<td>${row.ROUTE}</td>
+			<td>${row.CRDNT_X}</td>
+			<td>${row.CRDNT_Y}</td>
+		</tr>
+		`);
+	}
+	$("#demoJSON").html(table.join('\n'));
+}
+
+</script>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

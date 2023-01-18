@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>테이블 생성 연습</title>
+<!-- 
+랜덤으로 생성된 row (행) 과 col(열)  값에 따라 <table> 을 생성해보세요
+document.write() 사용   +  for 문등 제어문 사용 
+페이지 새로고침 할때마다 row, col 이 random 으로 생성
+row 와 col 은 각각 1 ~ 10 사이 랜덤 정수값
+ -->
+<style>
+table, td, th{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+table{
+	width: 100%;
+}
+</style>
+</head>
+<body>
+<script>
+
+// TODO
+let n = Math.floor(Math.random() * 10) + 1; // 소수점 이하를 버림한다.
+document.write("n:" + n + "<br>")
+document.write("<ol>");
+for(let i = 0; i < n; i++) {
+	document.write(`<li>안녕하세요 ${i}번째입니다</ㅣㅑ>`);
+}
+document.write("</ol>");
+
+</script>
+
+<hr>
+
+<script>
+	let row = Math.floor(Math.random() * 10) + 1;
+	let col = Math.floor(Math.random() * 10) + 1;
+
+	document.write("row: " + row + ", col: " + col);
+
+	document.write("<br>");
+
+	document.write("<table>");
+
+	for(let r = 1; r <= row; r++) { //행
+		document.write("<tr>");
+		for(let c = 1; c <= col; c++) { //열
+			document.write("<td>" + `${r}행 ${c}열` + "</td>");
+		}
+		document.write("</tr>");
+}
+
+	document.write("</table>");
+
+
+	// document.write("<tr>");
+	// document.write("<td></td>");
+	// document.write("<td></td>");
+	// document.write("<td></td>");
+	// document.write("</tr>");
+
+	
+
+
+	
+
+</script>
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

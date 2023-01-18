@@ -1,0 +1,40 @@
+// 값 여러 줄에 걸쳐 받기
+const readline = require('readline');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+let input = [];
+let lines = 2; //3줄에 걸쳐 입력 받기
+
+// 입력시 줄바꿈이 입력될때 마다 수행되는 코드 등록
+rl.on('line', function(line){  // 사용자가 입력한 line (string)
+    input.push(line.trim());
+   
+    if(input.length == lines) 
+    rl.close();  // 입력완료시 close! 
+});
+
+// 입력완료 close시 수행할 코드 등록
+rl.on("close", function(){
+
+
+    let sum = 0;
+
+    for(i = 0; i < input.length; i++) {
+        sum += input[i];
+        avg = sum / input.lenght;
+    }
+    console.log(avg);
+
+    if(avg >= 80) {
+        console.log("pass");
+    }else if (avg < 80) {
+        console.log("fail");
+    }
+
+
+
+});

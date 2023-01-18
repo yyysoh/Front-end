@@ -1,0 +1,30 @@
+
+
+
+const readline = require('readline');
+const { runInNewContext } = require('vm');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+let input = undefined;
+
+// 입력시 줄바꿈이 입력될때 마다 수행되는 코드 등록
+rl.on('line', function(line){  // 사용자가 입력한 line (string)
+    input = line.trim();
+
+    if(input % 3 == 0) {
+      console.log(input / 3);
+    }else if(input == -1) {
+    rl.close();
+    }
+});
+
+// 입력완료 close시 수행할 코드 등록
+rl.on("close", function(){
+
+
+
+});

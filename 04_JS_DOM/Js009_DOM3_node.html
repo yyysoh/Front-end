@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>DOM Navigation</title>
+</head>
+<!-- 
+DOM 에서 node 
+
+
+node type (종류) 와    nodeType 값
+	Element node		1       <h1 class="heading">W3Schools</h1>
+	Attribute node		2        class = "heading" (deprecated)
+	Text node			3        W3Schools
+	Comment node		8        
+	Document node		9        HTML 문서 자신, <html> 의 부모
+	DOCUMENT_TYPE_NODE	10       <!Doctype html>
+	
+	** 명심! Element node 가 text 를 갖고 있는 것이 아니다!!! 
+	text를 담기 위한 노드가 따로 있다 element node의 자식 노드에 갖고 있다
+
+	attribute는 부모 관계 말고 부속처럼 구성되어 있다. 
+
+	textnode는 element의 자식 node가 가지고 있다
+
+JS 로 DOM 의 node 간 navigate 할수 있다.
+- parentNode
+- childNodes[nodenumber] 배열 형태로 주어진다
+- firstChild
+- lastChild
+- nextSibling
+- previousSibling
+- attributes
+
+ -->
+<body>
+<img src="https://www.w3schools.com/js/pic_htmltree.gif">
+<hr>
+<img src="https://www.w3schools.com/js/pic_navigate.gif">
+<hr>	
+<h2>childNodes, nodeValue</h2>
+<!-- childNodes 와 nodeValue -->
+<h3 id="id01">My First Page</h3>
+<p id="id02"></p>
+
+<script>
+
+// TODO
+//'text node 의 값'에 접근하는 방법(들) My First Page 이거 꺼내서 2번에 넣기
+document.getElementById('id02').innerHTML =
+	//document.getElementById('id01').innerHTML; //정확히는 innerHTML은 text node 값은 아님. 지금은 text만 있으니 text node와 같은 값 나옴 
+	//document.getElementById('id01').firstChild.nodeValue;
+	
+	//getElementById('id01') 이게 아이디가 id01인 element를 리턴함 그게 element node임
+	//element 를 리턴함 그게 node. 그거의 firstChild는 text node 꺼내려면 nodevalue
+	document.getElementById('id01').childNodes[0].nodeValue;
+	//childNodes 배열로 나옴.
+
+
+
+	// nodeValue 는
+	//  - Element node 의 nodeValue 는 null
+	//  - Text node 의 nodeValue 는 text값
+	//  - Attribute node 의 nodeValue 는 attribute value
+
+
+
+
+</script>
+
+
+
+<br><hr>
+<h2>document.body</h2>
+<p onclick="alert(document.body.innerHTML)">클릭하면 body 의 컨텐츠가!</p>
+<!--전체 중 body만-->
+
+<br><hr>
+<h2>document.documentElement</h2>
+<p onclick="alert(document.documentElement.innerHTML)">클릭하면 document 의 컨텐츠가!</p>
+<!--전부-->
+
+
+<br><hr>
+<h2>nodeType</h2>
+<p id="id03"></p>
+<script>
+// TODO
+document.getElementById('id03').innerHTML =
+	document.getElementById('id01').nodeType;
+	+ document.getElementById('id01').firstChild.nodeType;
+
+
+
+</script>
+
+<!-- TODO: document.body 노드 밑의 
+	모든 child 노드의 nodeName, nodeValue, nodeType 을 출력해보세요
+	
+	hint) document.body.childNodes 사용
+ -->
+ 
+<br><hr>
+<h2>childNodes, nodeName, nodeType, nodeValue</h2>
+<!-- body element node 의 child 들의 nodeName, nodeType, nodeValue  -->
+<p id="id04"></p>
+<script>
+
+// TODO
+
+let c = document.body.childNodes;
+let result = [];
+for(e of c){
+	result.push(`${e.nodeName} | ${e.nodeType} | ${e.nodeValue}`);
+}
+document.getElementById('id04').innerHTML = result.join('<br>');
+
+
+//text |3| : 이 먼저 나옴 왜? 줄바꿈을 했기 때문에
+
+
+</script>
+
+<br><hr>
+<h2>attributes</h2>
+<!-- 특정element.attributes : attribute node(들) 만 추출한다, element의 부속 -->
+<img id="img01"
+	src="https://www.w3schools.com/html/img_girl.jpg"
+	alt="girl"
+	width="150"
+	height="200"/>
+
+<p id="id05"></p>
+<script>
+// TODO
+
+c = document.getElementById('img01').attributes; //배열의 형태로 노드들이 뽑혀져서 나온다
+result = [];
+for(e of c){
+	result.push(`${e.nodeName} | ${e.nodeType} | ${e.nodeValue}`);
+}
+document.getElementById('id05').innerHTML = result.join('<br>');
+
+
+
+
+
+</script>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>jQuery + AJAX</title>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<body>
+<h3>$.ajax() : 서울시 지하철 승하차 인원 정보</h3>
+<form>
+날짜 (yyyyMMdd): <input type="text" name="date" id="date" value="20181001"/><br><br>
+
+<button id="btn_load" type="button">승하차정보 가져오기</button>
+<button id="btn_remove" type="button">지우기</button>
+</form>
+<br><br>
+<h2>AJAX + XML</h2>
+<table id="demoXML"></table>
+<hr>
+<h2>AJAX + JSON</h2>
+<table id="demoJSON"></table>
+<script>
+/*
+$.ajax() 함수
+  jQuery 내의 모든 AJAX 관련 함수는 내부적으로 $.ajax()를 호출한다
+  load(), get(), post() 등을 사용하지 못하는 경우는 $.ajax() 를 사용하면 된다.
+
+[참조]
+http://api.jquery.com/jquery.ajax/
+https://www.w3schools.com/jquery/ajax_ajax.asp
+
+
+[구문]
+제이쿼리의 ajax. 얘는 $. 으로 되어 있음. 바로 함수 등장하게 하는 것 제이쿼리에서 제공하는 static 함수들
+$.ajax({name:value, name:value, ... }) 매개변수로 object가 들어간다
+
+위 name:value 에 전달되어질 주요 name 들은 다음과 같다
+
+url ★: request 보낼 url
+
+type ★ : "GET" 혹은 "POST"
+
+data : request 에 전송할 데이터, object 타입, POST 방식인 경우 여기에 넘겨야 한다
+	ex) data : {"id" : "scott", "pw" : "tiger"}
+		form에 있는 걸 다 넣으면 복잡해짐 jquery에 간단하게 하는 방법이 있음
+
+cache : 이전의 동일 url 로 request 한결과를 cache 할지 여부 (디폴트값은 true!)
+
+async : 비동기 여부 (디폴트값은 true)
+
+contentType : 서버에 데이터 전송시 사용할 content type
+		디폴트는 "application/x-www-form-urlencoded"
+
+success(result,status,xhr) ★ : 
+	request 성공한 경우 수행하는 함수
+	- result - response 받은 데이터,  4:18 다시!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	           JSON 인 경우 이미 파싱 완료되어 JSON object 상태!
+	           XML 인 경우 이미 파싱 완료되어 DOM object 상태!
+			   
+	- status - response status 값
+	- xhr - XMLHttpRequest
+
+error(xhr,status,error) :
+	request 실패한 경우 수행하는 함수
+
+beforeSend(xhr) :
+	request 직전에 수행하는 함수
+
+complete(xhr,status) :
+	request 처리 종료후 수행하는 함수, success / error 함수 끝난후.
+	
+dataFilter(data,type) :
+	response 갓 받은 데이터 (raw data)를 처리할때 수행하는 함수
+	
+*/
+
+var api_key = "6153744b5979797937365352704674";
+ 
+ $(document).ready(function(){
+	 $("#btn_load").click(function(){
+		 var date = $("#date").val().trim();
+		 //document.getElementById("date").value.trim(); 
+		 
+		 // XML
+		 var url = "http://openapi.seoul.go.kr:8088/" + api_key + "/xml/CardSubwayStatsNew/1/5/" + date;
+		
+		// TODO
+		$.ajax({ //매개변수 오브젝트
+		url: url,//어디로 url request 할 것인지
+		type: "GET",
+		cache: false, //동일한 걸 반복되게 할 경우 브라우저가 기억해서 또 request할 필요 없음 기억하는 request로 불러옴 그 cache를 안하겠다
+		success: function(data, status){ //이 함수는 매개변수 받을 수 있다 (result, status, xhr)
+				//response 완료되면 호출되는 함수
+				//data에는 이미 xml parsing 된 dom 객체 담겨온다
+				//status: response text 값
+				if(status == "success") parseXML(data); //성공한 것
+
+		
+		},
+		 });
+		 
+		 
+		// JSON
+		url = "http://openapi.seoul.go.kr:8088/" + api_key + "/json/CardSubwayStatsNew/1/5/" + date;
+		 
+		// TODO
+		$.ajax({
+			url: url,
+			type: "GET",
+			cache: false,
+			success: function(data, status){
+				// data 에는 이미 JSON 데이타가 JS object 로 변환되어 넘어온다
+				if(status == "success") parseJSON(data);
+			},
+
+		});
+		
+	 });
+	 
+	 $("#btn_remove").click(function(){
+		// $("#demoXML").html("");
+		// $("#demoJSON").html("");
+		$("#demoXML").empty();
+		$("#demoJSON").empty();
+	 });
+ });
+ 
+function parseXML(xmlDOM) {
+	// ↓ jQuery 사용 버젼으로 수정해보기
+	const table = []; //dom 객체를 제이쿼리로 만들어보기
+	table.push("<tr><th>호선</th><th>역명</th><th>승차인원</th><th>하차인원</th></tr>");
+	$(xmlDOM).find("row").each(function(){//$(xmlDOM) : xmldom을 제이쿼리에 넣기 최상위 루트
+	 //각각에 대해 수행할 함수
+		table.push(`
+		<tr>
+			<td>${$(this).find("LINE_NUM").text()}</td>
+			<td>${$(this).find("SUB_STA_NM").text()}</td>
+			<td>${$(this).find("RIDE_PASGR_NUM").text()}</td>
+			<td>${$(this).find("ALIGHT_PASGR_NUM").text()}</td>
+		</tr>
+		`);
+	});
+	$("#demoXML").html(table.join('\n'));
+}
+
+function parseJSON(jsonObj) {
+	// ↓ jQuery 사용 버젼으로 수정해보기
+	const table = [];
+	table.push("<tr><th>호선</th><th>역명</th><th>승차인원</th><th>하차인원</th></tr>");
+	for(row of jsonObj.CardSubwayStatsNew.row){
+		table.push(`
+		<tr>
+			<td>${row.LINE_NUM}</td>
+			<td>${row.SUB_STA_NM}</td>
+			<td>${row.RIDE_PASGR_NUM}</td>
+			<td>${row.ALIGHT_PASGR_NUM}</td>
+		</tr>
+		`);
+	}
+	$("#demoJSON").html(table.join('\n'));
+}
+</script>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

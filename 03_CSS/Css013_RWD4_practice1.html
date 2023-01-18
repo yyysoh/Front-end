@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RWD 연습</title>
+
+<style>
+/* TODO */
+
+* {
+	box-sizing: border-box;   /* RWD 필수 */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+#container {
+	margin: 10px;
+}
+
+
+/*mobile*/
+[class*=col-] {
+	float: left;
+	border: 0.5px solid black;
+	padding: 10px;
+
+	margin: 5px; /*댑악 margin 넣으면 박스들이 아래로 넘어가니까 col- width 조절해야하네*/
+}
+
+.A {display: none;}
+.D {height: 150px;}
+
+.col-m-1 {width: 8.33%;} /*한칸짜리 폭*/
+.col-m-2 {width: 16.66%;} /*두칸짜리 폭*/
+.col-m-3 {width: 25%;}
+.col-m-4 {width: 29.9%;}
+.col-m-5 {width: 41.66%;}
+.col-m-6 {width: 48%;}
+.col-m-7 {width: 58.33%;}
+.col-m-8 {width: 66.66%;}
+.col-m-9 {width: 75%;}
+.col-m-10 {width: 83.33%;}
+.col-m-11 {width: 91.66%;}
+.col-m-12 {width: 100%;}
+
+.A::after {content: "12";} /*한칸짜리 폭*/
+.B::after {content: "12";} /*두칸짜리 폭*/
+.C::after {content: "12";}
+.D::after {content: "12";}
+.E::after {content: "4";}
+.F::after {content: "4";}
+.G::after {content: "4";}
+.H::after {content: "12";}
+
+ 
+
+
+@media only screen and (min-width: 600px){  /* 600 ~ */
+	/* Tablet */
+
+	/*이 쪽에 넣으면 height 안됨*/
+	.A {display: block;}  
+	.C {height: 150px;}
+
+	.col-t-1 {width: 7%;} /*한칸짜리 폭*/
+	.col-t-2 {width: 13%;} /*두칸짜리 폭*/
+	.col-t-3 {width: 23%;}
+	.col-t-4 {width: 28%;}
+	.col-t-5 {width: 41%;}
+	.col-t-6 {width: 48%;}
+	.col-t-7 {width: 58%;}
+	.col-t-8 {width: 66%;}
+	.col-t-9 {width: 71%;}
+	.col-t-10 {width: 81%;}
+	.col-t-11 {width: 91%;}
+	.col-t-12 {width: 100%;}
+
+	/* .A {display: block;}
+	.C {height: 150px;} */
+	.E {height: 70px;}
+	.F {height: 70px;}
+
+	
+	.A::after {content: "2";} /*한칸짜리 폭*/
+	.B::after {content: "10";} /*두칸짜리 폭*/
+	.C::after {content: "2";}
+	.D::after {content: "8";}
+	.E::after {content: "2";}
+	.F::after {content: "2";}
+	.G::after {content: "3";}
+	.H::after {content: "9";}
+}
+
+
+@media only screen and (min-width: 768px) {/*768~*/
+	/*pc*/
+	.col-1 {width: 7%;} /*한칸짜리 폭*/
+	.col-2 {width: 13%;} /*두칸짜리 폭*/
+	.col-3 {width: 23%;}
+	.col-4 {width: 28%;}
+	.col-5 {width: 41%;}
+	.col-6 {width: 55%;}
+	.col-7 {width: 58%;}
+	.col-8 {width: 69%;}
+	.col-9 {width: 71%;}
+	.col-10 {width: 81%;}
+	.col-11 {width: 91%;}
+	.col-12 {width: 100%;}
+
+	.C {height: 150px;}
+	.E {height: 45px;} 
+	.F {height: 45px;} 
+	.G {height: 45px;} 
+
+
+
+
+	.A::after {content: "4";} /*한칸짜리 폭*/
+	.B::after {content: "8";} /*두칸짜리 폭*/
+	.C::after {content: "2";}
+	.D::after {content: "6";}
+	.E::after {content: "4";}
+	.F::after {content: "4";}
+	.G::after {content: "4";}
+	.H::after {content: "12";}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+    
+</head>
+<body>
+
+<!-- TODO -->
+<div id="container">
+<div class="A col-m-12 col-t-2 col-4">A:</div>
+<div class="B col-m-12 col-t-10 col-8">B:</div>
+<div class="C col-m-12 col-t-2 col-2">C:</div>
+<div class="D col-m-12 col-t-8 col-6">D:</div>
+<div class="E col-m-4 col-t-2 col-4">E:</div>
+<div class="F col-m-4 col-t-2 col-4">F:</div>
+<div class="G col-m-4 col-t-3 col-4">G:</div>
+<div class="H col-m-12 col-t-9 col-12">H:</div>
+
+</div>
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

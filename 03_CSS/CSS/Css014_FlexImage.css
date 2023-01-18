@@ -1,0 +1,53 @@
+@charset "UTF-8";
+* {box-sizing: border-box;}
+body {margin: 0; }
+.column img{width: 100%;}
+.header{text-align: center; padding: 32px;}
+
+.row{
+	/* content 에 관계 없이 
+	flexible 아이템들을 
+	동일한 length 로 맞춘다*/
+	
+	/* TODO */
+	display: flex;
+	/* flexible 아이템들이 wrap 될것인지 여부
+		wrap / nowrap */
+
+	/* TODO */
+	flex-wrap: wrap; /*확대하면 사진도 같이 확대*/
+}
+
+.column {
+	/* TODO */
+	flex: 25%; /*사진들이 1/4씩 차지한다*/
+	max-width: 25%;
+	padding: 0 4px;
+}
+
+.column img{
+	/* TODO */
+	margin-top: 8px;
+	vertical-align: middle;
+}
+
+
+
+@media (max-width: 800px){ /*  ~ 800 */
+	/* TODO */
+	.column {
+		flex: 50%;
+		max-width: 50%;
+	}
+} 
+
+@media (max-width: 600px){  /* ~ 600 */
+	/* TODO */	
+	.column {
+	flex: 100%;
+	max-width: 100%;
+	}
+}
+
+
+

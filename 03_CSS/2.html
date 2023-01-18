@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+    <style>
+
+        input[id*=answer] {
+            display: none;
+        }
+        input[id*='answer'] + label {
+            display: block;
+            padding: 20px;
+            border-bottom: 0;
+            color: green;
+            font-weight: 900;
+            background-color: beige;
+            cursor: pointer;
+        }
+/*     
+        input[id='answer'] + label em {
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            right: 10px;
+            height: 30px;
+            margin-top: -15px;
+            display: inline-block;
+
+        } */
+
+        input[id*='answer'] + label + div {
+            max-height: 0;
+            /* transition: all .1s; */
+            overflow: hidden;
+
+        }
+
+        input[id*='answer'] + label + div p {
+            display: inline-block;
+            padding: 20px;
+        }
+
+        
+        input[id*='answer'] + label + div a {
+            display: block;
+            padding: 20px;
+        }
+
+        input[id*='answer']:checked + label + div {
+            max-height: 100px;
+        }
+    
+    </style>
+    
+</head>
+
+<body>
+
+
+<div class="touch">
+    <input type="radio" id="answer01">
+    <label for="answer01">컨텐츠 제목 부분</label>
+    <div>안녕</div>
+</div>
+
+
+<div class="touch">
+    <input type="radio" id="answer02">
+    <label for="answer02">컨텐츠 제목 부분</label>
+    <div><p>안녕</p></div>
+</div>
+
+
+
+<div class="touch">
+    <input type="radio" id="answer03">
+    <label for="answer03">컨텐츠 제목 부분</label>
+    <div><p>안녕</p></div>
+</div>
+
+
+
+<div class="touch" id="about">ABOUT <i class="fas fa-caret-down "></i>
+    <div class="submenu" id="submenu" style="width: 100px;">
+        <a href="api.html">올레길</a><br>
+        <a href="map.html">지도</a>
+    </div>
+</div>
+
+<div class="touch">
+    <input type="radio" id="answer05">
+    <label for="answer05">ABOUT</label>
+    <div class="submenu" id="submenu" style="width: 100px;">
+        <a href="api.html">올레길</a>
+        <a href="map.html">지도</a>
+    </div>
+</div>
+
+<div class="touch">
+    <input type="radio" id="answer05">
+    <label for="answer05">ABOUT</label>
+    <div class="submenu" id="submenu" style="width: 100px;">
+        <a href="api.html">올레길</a>
+        <a href="map.html">지도</a>
+    </div>
+</div>
+
+<div class="touch">
+    <input type="radio" id="answer05">
+    <label for="answer05">ABOUT</label>
+    <div class="submenu" id="submenu" style="width: 100px;">
+        <a href="api.html">올레길</a>
+        <a href="map.html">지도</a>
+    </div>
+</div>
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Float & Clear 1</title>
+<style>
+img {
+	width:170px; height:170px;
+	margin-left:15px;  /* 왼쪽 바깥 여백 */
+}
+img#f1 {
+	/* TODO */
+	float: none; /*다른 element에 영향을 안줌 */
+}
+img#f2 {
+	/* TODO */
+	 float: right; /*이미지 오른쪽으로 가고 확대하면 컨텐츠는 주변으로 배치된다 축소하면 다른 element에게 영향을 준다 hr에도 영향 끼침
+					어느 정도 제한이 되어야 한다 그러려면 중간에 float를 끊어야한다 그게 clear*/
+} 
+img#f3 {
+	/* TODO */
+	float: left; /* 왼쪽에 마진되어 있어서 여백이 있음 */
+	
+}
+
+/* TODO : clear*/
+div#clear {
+	clear: left;  /* right를 clear함 hr은 독립적으로 다음 섹션에 갈 수 있음 영향 안받고 */
+}
+
+</style>
+</head>
+<!-- CSS float 
+	https://www.w3schools.com/css/css_float.asp
+	
+	float 는 content 들을 어떻게 배치하고 자리 잡을지 세팅한다.
+	float는 둥둥 뜨다는 의미
+
+	left - element를  컨테이너의 왼쪽으로 float 한다
+	right- element를  컨테이너의 오른쪽으로 float 한다
+	none - float 안한다 (디폴트) (일반 텍스트 출력처럼 한다)
+	inherit - 부모의 float 값대로 동작.
+	
+	★ float 되면 float 된것들끼리 inline 처럼 배치된다.
+		ex) float:left 는 float:left 끼리.	
+	★ 일단 자신이 float가 되면 주변의 다른 element 의 content 는 그 '주변'으로 배치된다. 
+
+ -->
+<body>
+
+<p>아래 이미지와 이를 감싸는 paragraph 의 텍스트 들이 어떻게 배치되는지 확인해보기 위해 none, right, left 값을 주면서 관찰해보자</p>
+<hr>
+<!--
+	float: none 일때는 이미지도 텍스트의 하나처럼 배치된다 
+	float: right 하면, 이미지는 컨테이너 우측으로 float 하고 
+		주변 element의 content 은 float 하는 이미지 주변을 감싸는 형태가 된다.
+	float: left 하면, 이미지는 컨테이너 좌측으로 float 하고 
+		주변 element의 content 은 float 하는 이미지 주변을 감싸는 형태가 된다.
+ -->
+<p>
+	<img id="f1" src="https://www.w3schools.com/css/pineapple.jpg" alt="Pineapple">
+	<b>float:none</b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.
+</p>
+<hr>
+<p>
+	<img id="f2" src="https://www.w3schools.com/css/pineapple.jpg" alt="Pineapple">
+	<b>float:right</b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.
+</p>
+ <div style="clear: right"></div> <!--clear를 left만 하면 왼쪽건 독립, 오른쪽꺼는 영향이 미친다 고로 right도 하면 됨 -->
+<hr>
+<p>
+	<img id="f3" src="https://www.w3schools.com/css/pineapple.jpg" alt="Pineapple">
+	<b>float:left;</b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.
+</p>
+
+<!-- TODO : clear -->
+<div id="clear"></div>
+
+
+
+<hr> <!-- hr의 위치 주목! -->
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+

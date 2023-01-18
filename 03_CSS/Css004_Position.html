@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Position</title>
+
+<style>
+div.static {
+	/* TODO */
+ 	border: 3px solid limegreen;
+	position: static;
+}
+
+div.relative {
+	/* TODO */
+	border: 3px solid orangered;
+	width: 400px;
+
+	position: relative; /*top bottom 등 사용 가능*/
+	/* left: 30px; 왼쪽으로 30px 들어온 것 오른쪽으로 이동. 원래 위치 왼쪽에서부터 가는 것 */
+	/* left: -30px; /*왼쪽으로 감 마이너스니까. 음수값 주면 밖으로 간다 */
+
+} 
+div.fixed {
+	/* TODO */
+	border: 3px solid blue;
+	width: 300px;
+	position: fixed; /*화면에 대해서 고정적. 스크롤에 이동하면 같이 움직임*/
+	bottom: 0px; /*아래에 고정으로 붙음*/
+	right: 0px;
+}
+
+div.absolute { /*부모 안에 있는 게 커지니까 같이 커짐*/
+	/* TODO */
+	border: 3px solid orchid; /*부모 안쪽에 있음*/
+	width: 200px;
+	height: 100px;
+	position: absolute; /*부모에 붙어 있지만 좀 벗어남*/
+	top: 40px; /*부모 top으로부터 40px 떨어짐 */
+	/* - 부모가 static 이면, body 에 대해 상대적 배치다. absoulte2는 위에 가있음 */
+	right: 20px; /* 부모 바디인 오른쪽부터 떨어짐 */
+} 
+</style>
+
+</head>
+
+<!--
+	position : element 의 배치, 아래 4가지 종류
+	
+	1. static : (디폴트) 기본위치(normal) 에 배치.
+				top, bottom, left, right 와 아무런 영향 없슴
+				
+	-- 나머지 아래 3개는 모두 ~~에 대해 '상대적' 배치
+	   top, bottom, left, right 값에 영향 받음, 위로 아래로 왼쪽 오른쪽으로 얼마만큼인지
+	   
+	2. relative : 기본위치(normal)(static) 에 대해 '상대적' 배치
+	3. fixed : 뷰포트(viewport)(화면에 보여지는 스크린 크기)에 대해 '상대적' 배치
+	4. absolute : 부모(ancestor) 에 대해 '상대적' 배치
+			- 부모가 relative, fixed, absolute 인경우만 작동!
+			- 부모가 static 이면, body 에 대해 상대적 배치다.
+ -->
+<body>
+<h2>position: static</h2>
+<div class="static">static</div>
+
+<br><hr>
+
+<h2>position: relative</h2>
+<div class="relative">relative</div>
+
+<br><hr>
+
+<h2>position: fixed</h2>
+<div class="fixed">fixed</div>
+
+<br><hr>
+
+<h2>position: absolute</h2> <!-- 다음 2개 비교 -->
+<!--  부모가 relative, fixed, absolute 인 경우 -->
+<!-- TODO -->
+<div class="relative">부모1-relative
+	<div class="absolute">absolute1</div>
+</div>
+
+<br>
+<!-- 부모가 static 인 경우 -->
+<!-- TODO -->
+<div class="static">부모2-static
+	<div class="absolute">absolute2</div>
+</div>
+
+<br><hr>
+
+
+
+<!-- 이번단원은 학생들도 아래 br 태그기입해주세요 -->
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

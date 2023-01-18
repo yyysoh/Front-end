@@ -1,0 +1,21 @@
+
+// input[100];
+// for(i = 0; i <= 100; i++) {
+//   process.stdout.write(`${input[i]} `);
+//   if(input[i] == 0) {
+//     break;
+//   }
+// }
+
+
+
+
+input = [11,2,2,2,2,3,0]
+for(let i = 0; i <= input.length; i++) {  
+  if(input[i] == 0) {
+   break;
+}  else {
+  for(let k = i - 1; k >= 0; k--) {
+  process.stdout.write(`${input[k]} `);
+}}
+}

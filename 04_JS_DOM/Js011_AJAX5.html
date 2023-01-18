@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>AJAX API서울시 지하철 역사마스터정보</title>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+</head>
+<!--
+■서울시 지하철 역사마스터 정보
+http://data.seoul.go.kr/dataList/OA-21232/S/1/datasetView.do
+
+샘플url
+
+XML 버젼
+http://openapi.seoul.go.kr:8088/(인증키)/xml/subwayStationMaster/1/5/
+예] http://openapi.seoul.go.kr:8088/4d46796d7366726f3833774a774955/xml/subwayStationMaster/1/5/
+
+
+JSON 버젼
+http://openapi.seoul.go.kr:8088/(인증키)/json/subwayStationMaster/1/5/
+예] http://openapi.seoul.go.kr:8088/4d46796d7366726f3833774a774955/json/subwayStationMaster/1/5/
+ -->
+<body>
+<h1>서울시 역사 마스터 정보</h1>
+<form>
+start: <input type="number" id="start" value="1"/><br>
+end: <input type="number" id="end" value="5"/><br>
+
+<button type="button" onclick="loadData()">역사정보 가져오기</button>
+<button type="button" onclick="removeTable()">지우기</button>
+</form>
+<br><br>
+<h2>AJAX + XML</h2>
+<table id="demoXML"></table>
+<hr>
+<h2>AJAX + JSON</h2>
+<table id="demoJSON"></table>
+<!--ajax request (일부 데이터만)로 가져와 원하는 모양으로 만들기-->
+
+<script>
+var api_key = "6153744b5979797937365352704674";
+
+function removeTable(){ //테이블을 삭제하는거니까 id!!!  table id 넣기!!
+	// TODO
+	document.getElementById('demoXML').innerHTML= "";
+	document.getElementById('demoJSON').innerHTML = "";
+}
+
+function loadData() {
+	// TODO
+	//XML
+
+	let first = document.getElementById('start').value.trim();
+	let last = document.getElementById('end').value.trim();
+
+	let xhttp, url;	
+
+	url = `http://openapi.seoul.go.kr:8088/${api_key}/xml/subwayStationMaster/${first}/${last}`;
+
+	xhttp = new XMLHttpRequest(); //서버와 상호작용할 때 사용. URL에서 데이터를 가져올 수 있음. 데이터 일부 업데이트
+	xhttp.onreadystatechange = function() { //이 프로퍼티를 이용하면 서버에 요청한 데이터가 존재하고, 서버로부터 응답이 도착하는 순간을 특정할 수 있습니다.
+		if(this.readyState == 4 && this.status == 200) { //서버로부터 데이터를 전부 받은 상태 / 서버로부터 응답 상태가 성공
+			parseXML(this.responseXML);
+			//alert(this.responseXML);
+
+	}
+
+	};
+
+	xhttp.open("GET", url, true);
+	xhttp.send();
+
+
+	//JSON
+
+	url = `http://openapi.seoul.go.kr:8088/${api_key}/json/subwayStationMaster/${first}/${last}`;
+	
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			 //alert(this.responseText);
+			let jsonObj = JSON.parse(this.responseText); //response 데이터를 문자열로
+			parseJSON(jsonObj);
+		}
+	};
+	xhttp.open("GET", url, true);
+	xhttp.send();
+
+}
+
+
+
+
+function parseXML(xmlDOM) {
+	// TODO
+
+	const table = [];
+	table.push("<tr><th>호선</th><th>역명</th><th>승차인원</th><th>하차인원</th></tr>");
+
+	for(x of xmlDOM.getElementsByTagName('row')) { 
+		table.push(`
+		<tr>
+			<td>${x.getElementsByTagName("STATN_NM")[0].childNodes[0].nodeValue}</td>
+			<td>${x.getElementsByTagName("ROUTE")[0].childNodes[0].nodeValue}</td>
+			<td>${x.getElementsByTagName("STATN_ID")[0].childNodes[0].nodeValue}</td>
+			<td>${x.getElementsByTagName("CRDNT_X")[0].childNodes[0].nodeValue}</td>
+			<td>${x.getElementsByTagName("CRDNT_Y")[0].childNodes[0].nodeValue}</td>
+		</tr>
+		`)};
+		
+	document.getElementById('demoXML').innerHTML = table.join('\n');
+
+	} //아아아아 json 안나온 이유!!!!! 여기 중괄호 안했다!! json 아래에 함... ㅇㄴ
+
+
+function parseJSON(jsonObj){
+	// TODO	 
+	const table = [];
+	table.push("<tr><th>호선</th><th>역명</th><th>승차인원</th><th>하차인원</th></tr>");
+
+	for(x of jsonObj.subwayStationMaster.row) { 
+		table.push(`
+		<tr>
+			<td>${x.STATN_NM}</td>
+			<td>${x.STATN_ID}</td>
+			<td>${x.ROUTE}</td>
+			<td>${x.CRDNT_X}</td>
+			<td>${x.CRDNT_Y}</td>
+		</tr>
+
+	`);
+}
+		
+	document.getElementById('demoJSON').innerHTML = table.join('\n');
+
+}
+
+</script>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

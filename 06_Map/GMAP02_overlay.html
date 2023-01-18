@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Basic Google Map</title>
+</head>
+<!-- 
+Marker - Single locations on a map. Markers can also display custom icon images
+Polyline - Series of straight lines on a map
+Polygon - Series of straight lines on a map, and the shape is "closed"
+Circle and Rectangle
+Info Windows - Displays content within a popup balloon on top of a map
+Custom overlays
+ -->
+<body>
+<h1>My First Google Map</h1>
+
+<!-- Map Container 와 크기 지정 -->
+<div id="googleMap" style="width:100%;height:400px;"></div>
+<!--눈에 보이지 않는 div가 있음-->
+
+<script>
+function myMap() {
+//구글 맵의 property를 지정
+let mapProp = {
+    //center : 지도 표현 중심 좌표, 위도 경도 좌표로 지정
+    center : new google.maps.LatLng(37.556228, 126.972135),
+
+    //zoom level
+    zoom: 17,
+    };
+    let map = new google.maps.Map(document.getElementById('googleMap'), mapProp) //element 객체 지정
+    //첫번째 매개변수로 어떤 element의 구글 맵을 표현할 지 보여주고 두번째 매개변수로 맵 property로 구글 맵 생성 new를 사용해서
+
+    let myPos1 = {lat: 37.556228, lng: 126.972135}; //위도 경도를 myPos1에 넣기
+    let marker1 = new google.maps.Marker({position: myPos1});
+    marker1.setMap(map); //마커를 map에 지정!! marker을 map에 세팅 보통 반대인데ㅋ
+
+    
+    let myPos2 = {lat: 37.555228, lng: 126.973135}; 
+    let marker2 = new google.maps.Marker({
+        position: myPos2,
+        animation: google.maps.Animation.BOUNCE,
+    });
+    marker2.setMap(map);
+       
+       
+    //marker에 InfoWindow 띄우기
+    let myPos3 = {lat: 37.557228, lng: 126.971135}; //위도 경도를 myPos1에 넣기
+    let marker3 = new google.maps.Marker({position: myPos3});
+    marker3.setMap(map);
+
+    let infowindow = new google.maps.InfoWindow({
+        content: "이지역 맛집",
+    });
+	infowindow.open(map, marker3);
+
+	//market 대신 icon 띄우기
+
+     let myPos4 = {lat: 37.556828, lng: 126.972235}; //위도 경도를 myPos1에 넣기
+    let marker4 = new google.maps.Marker({
+		position: myPos4,
+		icon: "../img/pinkball.png",
+	});
+    marker4.setMap(map); 
+
+
+
+
+
+
+
+}
+
+</script>
+
+<!-- ↓key=API키, callback=함수 지정, 15:48!! 내가 지정한 callback 함수로 property 지정해서 ? callback=myMap 여기로 지정 구글맵에서 이 함수를 지정해서 구글맵을 띄움-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrJAN-iVI5sK9v9WhsAQckUnK1J2GeCoE&callback=myMap"></script>
+
+</body>
+</html>

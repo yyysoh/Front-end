@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Form 데이터</title>
+<style>
+div#btnBox {
+	position: fixed;
+	right: 0px; top: 0px;
+	margin: 4px;
+	border: 1px solid orange;
+	width: 180px;
+	
+}
+div#btnBox * { margin: 2px; }
+</style>
+</head>
+<!-- 
+	JavaScript 로 
+	다양한 form element 들의 '값을 가져 올수도' 있어야 한며,
+	반대로 '값을 입력해야 할수도' 있다.
+	
+	JavaScript 는 form element 들을 접근할수 있는
+	다양한 방법들을 제공한다.  (특히 name 값 활용!)
+
+  ★form 에서 읽어온 값은 무.조.건 string 이다!
+ -->
+ 
+<!-- 
+	※ 각 form element별 동작하는 것으로 JS 와 HTML 코드 작성하면서 확인 하기 
+ -->
+
+<script>
+
+// TODO
+const showData = function() {
+  //form 객체 가져오고 그 값 가져오기 (사용자가 입력한 값)
+
+  let result = "입력결과<br>";
+
+  //<form> element 객체 가져오기
+    let frm = document.forms['myform1']; //name='myform1'인 <form> element 객체
+  //frm = document.forms.myform1; //이것도 가능 property 값을 가져오는 것엔 두가지 방법이 있었잖아 이거 둘 다 사용 가능
+
+  
+    //1. 일반적인 input 값(입력된 값)을 읽어올 때는 .value 값을 쓰면 된다. frm는 form 객체
+    let username = frm['username'].value;  //frm 안에서 name='username'인 element
+    //username = frm.username.value;  //  가능
+    // username = document.forms.myform1.username.value; // 가능
+    
+
+    result += `이름: ${username}<br>`; //이름 작성 후 입력값 보여주기 클릭하면 뜸
+
+
+
+
+    //2.checkbox의 값 체크되면 해당 value 값을 가져올 수 있다 (.chedcked로 판단)
+    let hobby = []; //체크하는 게 복수개가 나올 수 있기에 배열로
+
+    //if(frm['drive'].checked) { //체크 여부 : 참 아니면 거짓이 나옴
+    // hobby.push(frm['drive'].value)
+    // }
+
+    frm['drive'].checked && hobby.push(frm['drive'].value);//이렇게로도 할 수 있음
+
+   
+    if(frm['music'].checked){//체크 여부 : 참 아니면 거짓이 나옴
+        hobby.push(frm['music'].value)
+    }
+
+    if(frm['sports'].checked) { //체크 여부 : 참 아니면 거짓이 나옴
+      hobby.push(frm['sports'].value)
+    }
+
+    // result += "취미: " + hobby.join(",") + "<br>";
+    result += `취미 : ${hobby}.join(',')<br>`;
+
+
+
+    //3. checkbox + 동일 name이 여럿
+    //frm['skill'] <-- skill 이라는 name을 갖고 있는 element들의 array 배열!
+    //배열이면 for문 돌릴 수 있겠네
+    let skill = [];
+
+    for(e of frm['skill']){
+      e.checked && skill.push(e.value);
+    }
+
+  
+
+    result += `보유기술: ${skill}.join(',')<br>`;
+
+
+
+    //4. radio : 이 또한 동일 name들로 구성 3번과 유사하다
+      let gender = ""; //값 하나 나오니까 문자열로
+
+      
+      for(e of frm['gender']){ //element 배열, checked로 확인 참인 걸로 선택
+        if(e.checked){
+          gender = e.value;
+        break; //어차피 radio는 하나만 체크되어 있을테니 하나 뽑고 끝내기
+      }
+    }
+      result += `성별: ${gender}<br>`;
+
+
+
+    //5. <select> : 단일값 .value 사용
+      result += "좋아하는차1: " + frm['cars'].value + "<br>";
+
+
+
+    //6. <select> : multiple  3과 유사   .selected 사용
+      let cars2 = [];
+
+    for(e of frm['cars2']){
+      e.selected && cars2.push(e.value);
+    }
+
+    result += `좋아하는차2: ${cars2.join(',')}<br>`;
+
+
+    // 7. <textarea> : .value 사용
+    result += '메모: ' + frm['message'].value + "<br>";
+
+    document.getElementById('result').innerHTML = result;
+}
+
+  
+
+
+      const setData = function() {
+        let frm = document.forms['myform1'];
+
+        //input
+        frm['username'].value = '홍길동';//홍길동 값 세팅됨
+      
+
+        //checkbox
+        frm['drive'].checked = false;
+        frm['music'].checked = true;
+        frm['sports'].checked = true;
+
+        //checkbox(동일 name) 배열임
+        frm['skill'][0].checked = false;
+        frm['skill'][1].checked = true;
+        frm['skill'][2].checked = true;
+
+
+        //radio
+        frm['gender'][0].checked = true;
+
+        //select(단일)
+        //frm['cars'].value = 'fiat'; 
+        frm['cars'][2].selected = true; //이렇게도 됨
+
+        //select (multiple)
+        frm['cars2'][0].selected = true;
+        frm['cars2'][1].selected = false;
+        frm['cars2'][2].selected = true;
+        frm['cars2'][3].selected = false;
+
+        frm['message'].value = '안녕하세요';
+  }
+
+
+  
+</script>
+
+<body>
+  <div id="btnBox">
+    <button type="button" onclick="showData();">입력값 보여주기</button>
+    <br>
+    <button type="button" onclick="setData();">입력값 세팅</button>
+    <br>
+    <p id="result"></p> <!--여기에 넣겠다-->
+  </div>
+
+  <form name="myform1">
+    이름:<br>
+    <input type="text" name="username"><br>
+    <br>
+
+    취미:<br>
+    <input type="checkbox" name="drive" value="driving">드라이빙<br>
+    <input type="checkbox" name="music" value="music">음악<br>
+    <input type="checkbox" name="sports" value="sports">운동<br>
+    <br>
+
+    보유기술:<br>
+    <input type="checkbox" name="skill" value="자바">JAVA<br>
+    <input type="checkbox" name="skill" value="닷넷">.Net<br>
+    <input type="checkbox" name="skill" value="애플">iOS<br>
+    <br>
+
+
+    성별:<br>
+    <input type="radio" name="gender" value="male">남<br>
+    <input type="radio" name="gender" value="female">여<br>
+    <input type="radio" name="gender" value="animal">케모노<br>
+    <br>
+
+    좋아하는 차1:<br>
+    <select name="cars">
+      <option value="volvo">볼보</option>
+      <option value="saab">사브</option>
+      <option value="fiat">피아트</option>
+      <option value="audi" selected>아우디</option>
+    </select>
+    <br><br>
+
+    좋아하는 차2:<br>
+    <select name="cars2" size="4" multiple>
+      <option value="volvo">볼보</option>
+      <option value="saab" selected>사브</option>
+      <option value="fiat">피아트</option>
+      <option value="audi" selected>아우디</option>
+    </select>
+    <br><br>
+
+
+    메모:<br>
+    <textarea name="message" style="width:200px; height:100px">The cat was playing in the garden.</textarea>
+    <br>
+
+    <!-- <input type="submit" value="제출">  -->
+
+  </form>
+
+  <!-- 
+<form name="myform2">
+별명:<br>
+<input type="text" name="nickname">
+
+<br><br>
+<input type="submit" value="제출">
+
+</form>
+ -->
+
+
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+
+</html>

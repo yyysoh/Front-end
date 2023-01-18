@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>DOM Animation</title>
+<style>
+#container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background: yellow;
+}
+#animate {
+  width: 50px;
+  height: 50px;
+  position: absolute; /*부모에게 상대적인 위치*/
+  background-color: red;
+}
+</style>
+</head>
+<!-- 
+window 객체에 다음의 함수들이 있다.
+
+setInterval(함수, 시간간격) 
+	: '시간간격' 으로 '함수' 수행 , ms 단위
+	: 리턴값은 '애니메이션id' 객체 리턴
+	
+clearInterval('애니메이션id')
+	: ''애니메이션id' 의 애니메이션 종료
+ -->
+<body>
+<button onclick="clock();">시간</button>
+<br><br>
+<p id="timeboard"></p>
+<script>
+var clockAnimId = undefined;
+
+//13:15~~~~ 다시...ㅜ 하.. 어렵다 어려워
+function clock(){ //클릭하면 clock 함수가 동작하게 되어 있음
+  //tick(); //클릭할 때마다 동작하는 것, 일정시간마다 자동으로 호출되게 할 수 있음
+
+  if(!clockAnimId) { //undefined 상태면 애니메이션 시작함 아이디로 관리해야 함 그래서 아이디로 받음
+  clockAnimId = setInterval(tick, 1000); //1000ms마다 자동으로 호출되어 나타남 특별한 애니메이션id가 리턴됨
+  } else {  //애니메이션이 있으면 종료하겠음
+    clearInterval(clockAnimId);
+    clockAnimId = undefined; //undefined로 바꿈 왜..? 이거 안하면 아이디값 계속 가짐 또 클릭했을 때 값 가지게 하려면 undefined 가져야 함
+  }
+
+}
+	// TODO
+  function tick(){
+  var d = new Date(); // 현재시간
+  document.getElementById("timeboard").innerHTML =
+    d.getFullYear() + "/" +
+    (d.getMonth() + 1) + "/" +  // 0 ~ 11
+    d.getDate() + " " +
+    d.getHours() + ":" +
+    d.getMinutes() + ":" +
+    d.getSeconds()
+}
+  
+ 
+
+
+// TODO
+
+</script>
+
+<hr>
+
+<button onclick="myMove()">Click Me</button> <!--클릭하면 mymove 동작하게 되어 있음 클릭할 때마다 0으로 리셋-누를때마다 애니메이션이 등록된다-->
+<br><br>
+
+<div id ="container">
+  <div id ="animate"></div>
+</div>
+
+<script>
+function myMove() {
+
+	// TODO 빨간색을 움직여보겠음
+  let elem = document.getElementById('animate');
+  let pos = 0; //position
+
+
+  let id = setInterval(frame, 5); //50ms마다 저 프레임 함수 호출하겠음
+  //함수에서 함수 정의 마음껏 가능 
+  function frame() {
+    if(pos == 350) {
+      clearInterval(id); //?????????????????왜 id???????? 13:25 -->애니메이션 id
+    }else {
+
+    pos++; //position 1씩 증가
+    elem.style.top = pos + 'px'; //0이 아니면 무조건 단위값 붙이기
+    elem.style.left = pos + 'px'; //왼쪽 위쪽에 공간이 생기는 것
+   }
+
+  }
+
+
+}
+</script>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

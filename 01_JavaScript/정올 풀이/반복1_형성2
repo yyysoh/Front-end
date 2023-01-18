@@ -1,0 +1,42 @@
+// 정수값 여러 개 입력 받기 map 추가함
+const readline = require('readline');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+let input = undefined;
+
+// 입력시 줄바꿈이 입력될때 마다 수행되는 코드 등록
+rl.on('line', function(line){  // 사용자가 입력한 line (string)
+    input = line.trim().split(/\s+/).map((e) => parseInt(e));  //map 추가 배열배열
+
+    rl.close();   
+});
+
+// 입력완료 close시 수행할 코드 등록
+rl.on("close", function() {
+   
+    odd = 0;
+    even = 0;
+    i = 0;
+    
+while(true) {
+    if(input[i] == 0) {
+        break;
+    }
+    else if(input[i] % 2 == 0) {
+        even++;
+    } else{
+        odd++;
+    } 
+    i++;
+}
+
+console.log(`odd : ${odd}`);
+console.log(`even : ${even}`);
+
+
+
+});

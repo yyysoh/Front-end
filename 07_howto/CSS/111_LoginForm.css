@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+/* TODO */
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1}
+
+
+/*modal*/
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed; /*일반 static 상태에선 height가 먹히지 않는다*/
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background-color: rgb(0,0,0, 0.4);
+    overflow: auto;
+    padding-top: 60px;
+    display: none; /*처음엔 안보임*/
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    width: 80%;
+    margin: 15% auto; /*좌우 auto*/
+    border: 1px solid #888;
+
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative; /*x처리를 위해*/
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.close {
+    font-size: 35px;
+    font-weight: bold;
+
+    position: absolute;
+    top: 0;
+    right: 24px;
+    color: #000;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+
+
+/*form*/
+.container {
+    padding: 16px;
+}
+
+input[type=text], input[type=password]{
+    width: 100%;    
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    display: inline-block;
+    box-sizing: border-box; /*왜 이게 여기에 쓰이지. 삐져나온 input들이 안으로 들어옴 무슨 원리야;;;*/
+}
+
+button {
+    width: 100%;  /* 좌우폭 100% 사용 하기 */
+    background-color: #4CAF50;  /* 녹색 배경 */
+    color: white;   /* 흰색 글꼴 */
+    padding: 14px 20px;  /* 내부 여백주어 큼지막하게 */
+    border: none;  /* 테두리 없애기 */
+    margin: 8px 0; /* 위 아래 바깥 여백 */
+    cursor: pointer; /* 마우스 올라갔을때 포인터 설정 */
+}
+
+button:hover {
+    opacity: 0.8;  /* 마우스 올라가면 살짝 투명하게 */
+}
+  
+.cancelbtn {  /* 취소버튼은 빨갛게 */
+    width: auto; /* 내부 담는 내용 만큼의 폭으로 자동 설정 */
+    padding: 10px 18px; /* 위의 기본 버튼 스타일보단 작게 */
+    background-color: #f44336; /* 배경색 빨갛게 */
+}
+  
+span.psw {
+    float: right;
+    padding-top: 16px;
+
+}
+
+
+@media screen and (max-width: 380px) { /*380 언더일 때*/
+    .cancelbtn{width: 100%;}
+    .span.psw {
+        display: block;
+        float: none; /*psw 안보이게 함?*/
+    }
+    
+}
+
+
+
+.animate {
+    animation: animatezoom 0.6s;/*촤악 등장하게함*/
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)}/*시작과 끝 값만 줄 수 있다*/
+    to {transform: scale(1)}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

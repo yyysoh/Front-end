@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>when & then</title>
+<style>
+.box1 {
+	width:150px;
+	height : 150px;
+	background-color:  #3f8d3f;
+	position: absolute;
+	left : 50px;
+	top : 0;
+}
+.box2 {
+	width:150px;
+	height:150px;
+	background-color:  #82d3f2;
+	position: absolute;
+	left :50px;
+	top :150px;
+}
+.box3 {
+	width:150px;
+	height:150px;
+	background-color:  yellow;
+	position: absolute;
+	left :50px;
+	top :300px;
+}
+</style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+/*
+	$.when() 함수는 
+	thenable object 들 (다른말로 deferred object)들의
+	이벤트가 끝나면 리턴타입은 Promise 객체 리턴
+	https://api.jquery.com/jquery.when/
+		  
+	deferred.then() 함수
+	deferred 들이 다 마무리 되면 콜백 함수 호출
+	https://api.jquery.com/deferred.then/
+ */
+$(document).ready(function(){
+	$("#run").click(function(e){
+		  var $box1 = $(".box1"); //박스 담는 변수 
+		  var $box2 = $(".box2");
+		  var $box3 = $(".box3");
+
+		  // TODO
+		  //애니메이션 시켜보기
+		  $box1.animate({left: "200px"}, 1000); //1초에 걸쳐서 이동
+		  $box2.animate({top: "0px"}, 1500);
+		  //$box3.animate({top: "150px"}, 1500);
+		  //각각의 element가 animate를 진행하니 동시에 진행한다 바로!
+		  //alert('hhh'); //바로!
+		  
+		  
+		  // $box1 과 $box2 의 애니메이션이 다 끝나고 나서 $box3 가 움직이게 하려면?
+          // 전제
+          //  : $box1 과 $box2 중 누가 먼저 끝날지는 모른다
+          //  : $box1 과 $box2가 언제 끝날지는 모른다
+		  
+		  //만약 앞의 작업이 얼마나 걸리는지를 안다면 delay() 사용 가능
+		 //$box3.delay(1500).animate({top: "150px"}, 1500); 
+		 //하지만 앞의 작업이 언제 누가 먼저 끝날지 몰라 그럴 때 when
+
+		 //$.when() 사용
+		 $.when($box1, $box2).then(function() {
+			$box3.animate({top: "150px"}, 1500);
+		 }); //박스원 박스투가 끝나면 실행할 수 있는 promise 객체를 리턴한다 거기에 붙일 수 있는 메소드가 여러 개 있다 일단 then
+		    //then : 앞의 동작이 다 끝나면 수행하는 함수를 뒤에 붙인다
+
+		  // $.when() 함수는
+          // thenable object 들 (다른말로 deferred object)들의 
+          // 이벤트가 끝나면 리턴타입은 Promise 객체 리턴
+          // https://api.jquery.com/jquery.when/
+		  // deferred object : 지연되는 작업들을 하는 객체이다. 이 객체를 매개변수로 여러 개 줄 수 있다 그건 promise 객체를 리턴. 거기에 작업을 걸 수 있다 일부, 다 작업이 끝나는 등의 조건을 뒤에 걸고 then은 앞의 박스들이 다 끝나면 callback 매개변수를 넘겨주면 된다
+		  // deferred 들이 다 작업 마무리 되면 콜백 함수 호출
+
+	});	
+});
+</script>
+
+<body>
+<button id="run">run</button>
+<div class="box1"></div>
+<div class="box2"></div>
+<div class="box3"></div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

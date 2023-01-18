@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>jQuery Selector</title>
+<style>
+  div {
+    background: yellow;
+    border: 1px solid #AAA;
+    width: 80px;
+    height: 80px;
+    margin: 0 5px;
+    float: left;
+  }
+  div.colored {
+    background: green;
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+
+// TODO
+
+
+</script>
+</head>
+<body>
+
+<button id="run">Run</button>
+ 
+<div></div>
+<div id="mover"></div>
+<div></div>
+
+<script>
+
+// TODO
+function animateIt() { //animateIt 호출되면 실행. script 호출 시 실행. 로딩하면 지금 안됨. 아래에 있기 떄문에. 이걸 로딩하고 실행되게 하려면 아래에 붙여야 한다
+  $("#mover").slideToggle("slow", animateIt); //위로 쏵 밀려 올라가는 것. slow 끝나면 또 반복되게 하는 것(animateIt)
+}
+animateIt();
+
+
+//다시 9:38
+$("#run").click(function() {
+  $("div:animated").toggleClass("colored"); //colored : coloed가 있으면 빼고 없으면 넣는것
+  // animated에서 동작중인 element에만 적용. 중간꺼만 움직임
+});
+
+</script>
+
+</body>
+</html>

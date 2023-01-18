@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>DOM bubble/capture</title>
+</head>
+<style>
+ul, li {padding: 5px;margin: 3px; box-shadow: 1px 1px 1px 1px gray;}
+ul{background-color: pink;}
+li{background-color: cyan;}
+</style>
+<!-- 
+element.addEventListener("이벤트", 함수, useCapture)
+
+https://javascript.info/bubbling-and-capturing
+
+
+window.event 객체 사용
+	event.stopPropagation();
+
+발생된 element가 상위로 이벤트가 전파 : bubbling 아래에서 거품이 뽀글뽀글 올라오는 것처럼
+
+-->
+<body>
+<ul>
+  <li onclick="show(this)">Coffee</li> <!--this는 li elements-->
+  <li onclick="show(this)">Tea
+    <ul>
+      <li onclick="event.stopPropagation(); show(this);">Black tea</li> <!--블랙티 나오고 티 나옴 뭐징 tea랑 black tea가 동작한 것-->
+      <!--영역으로 겹쳐있다. 안에 있는 게 뒤쪽으로 전파한다. 80분-->
+      <!--event.stopPropagation(); show(this) 이거 쓰면 이벤트 전파 더이상 안함-->
+      <li onclick="show(this)">Green tea</li>
+    </ul>
+  </li>
+  <li>Milk</li>
+</ul>
+
+<script>
+
+// TODO
+function show(e) {
+  //클릭했을 때 텍스트만 보이게 할 것, text만 팝업 띄우기 (innerHTML(첫 태그부터 끝??)과는 다름)
+  alert(e.childNodes[0].nodeValue)
+}
+
+
+
+
+
+
+
+</script>
+
+<br>
+<ul id="ad">
+  <li>커피</li>
+  <li>차
+    <ul>
+      <li>홍차</li>
+      <li>녹차</li>
+    </ul>
+  </li>
+  <li>우유</li>
+</ul>
+
+<script>
+
+// TODO 실무에서는 click 안함 그러면?
+
+let li = document.querySelectorAll("#ad ul li"); //위의 li elements 다 가져옴
+
+for(e of li) {
+  // e.addEventListener("click", function(){show(this)}); //bubbling. show this 수행하기 this는 e
+   e.addEventListener("click", function(){show(this);}, true); //capturing
+}
+
+
+
+
+</script>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

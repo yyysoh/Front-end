@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    background-color: #f1f1f1;
+}
+
+div#main {
+    padding: 15px 15px 2500px; /*스크롤 생김 일부러 스크롤 생기기 위해 한 것*/
+    font-size: 30px;
+}
+
+#navbar {
+    background-color: #333;
+    position: fixed;
+    width: 100%;
+    display: block;
+
+    /*화면 바깥에 있다가 스크롤하면 내려오게 할 것*/
+    /*처음에는 화면 위로 올라감 애니메이션할 때 top값을 바꿀 것 transition도 주고*/
+    top: -55px;
+    transition: top 0.3s;
+}
+
+#navbar a {
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 17px;
+    display: 17px;
+    float: left;
+    display: block; /*a의 인라인에 패딩값을 주기 위함*/
+    padding: 15px; 
+    text-align: center;
+}
+
+#navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>영수증 확인폼 - jQuery DOM연습2</title>
+    <style>
+        #receipt {
+            width: 700px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table,
+        #receiptOption,
+        th,
+        td {
+            border: 1px solid #aaaaaa;
+            border-collapse: collapse;
+            padding: 0;
+        }
+
+        tr {
+            height: 40px;
+        }
+
+        th {
+            width: 180px;
+            text-align: left;
+            padding: 8px;
+            background-color: rgb(198, 214, 235);
+        }
+
+        #receiptOption {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px;
+        }
+
+        .longText {
+            width: 300px;
+            height: 20px;
+            margin: 5px 10px;
+        }
+
+        .shortText {
+            width: 60px;
+            height: 30px;
+            margin: 5px 20px;
+        }
+
+        #btn {
+            font-size: 16px;
+            width: 80px;
+            height: 35px;
+            color: white;
+            background-color: rgb(54, 104, 168);
+            display: block;
+            margin: auto;
+        }
+
+        /* 처음 시작은 구매자명과 결제금액만 보이게 */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // Js009_DOM5_practice1.html 과 같은 동작을 jQuery 로 작성해보세요.
+    // 아래의 HTML 은 수정하지 마세요
+    // 아래 HTML 안에 inline JS 코드 없이 동작할수 있도록 아래에 작성해보세요
+
+    $(document).ready(function(){
+        $("#receiptOption input").change(function(){
+            let $radios = $("[name='option']");
+            let $forms = $("form");
+
+            for(let i = 0; i < $radios.length; i++){
+                if($(this).val() == $radios.eq(i).val()){
+                    $forms.eq(i).show();  // OK
+                    // $($forms[i]).show();    // OK
+                    // $($forms[i]).removeClass('hidden') // OK
+                } else {
+                    $forms.eq(i).hide();  // OK
+                    // $($forms[i]).hide();    // OK
+                    // $($forms[i]).addClass('hidden')  // OK
+                }
+            }
+        });
+
+        $("#btn").click(function(){
+            let op = $("[name='option']:checked").val();
+            let $form, $name, $price, $email;
+            switch(op){
+                case "구매자명+금액":
+                    $form = $("[name='frm1']");
+                    $name =  $form.find("[name='name']");
+                    $price = $form.find("[name='price']");
+
+                    // 구매자명 유효성 검사
+                    if ($name.val().trim() == "") {
+                        alert("구매자명을 입력하세요.");
+                        $name.focus();
+                        return;
+                    }
+                    // 결제금액 유효성 검사
+                    if ($price.val().trim() == "" || $price.val().trim() < 0) {
+                        alert("결제금액을 입력하세요.");
+                        $price.focus();
+                        return;
+                    }
+
+                    $form.submit();
+                    break;
+                case "이메일":
+                    $form = $("[name='frm2']");
+                    $email = $form.find("[name='email']");
+                    const emailPat = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/; // email 패턴에 대한 정규표현식
+
+                    // 이메일 유효성 검사
+                    if (!emailPat.test($email.val().trim())) {
+                        alert("이메일을 정확하게 입력하세요.");
+                        $email.focus();
+
+                        return;
+                    }
+
+
+                    $form.submit();
+                    break;
+                case "카드번호":
+                    $form = $("[name='frm3']");
+
+                    // 카드번호 유효성 검사
+                    const numPat = /^\d{4}$/;
+
+                    for(e of $form.find("[name='cardNum']")){
+                        if(!numPat.test(e.value.trim())){
+                            alert("카드번호를 정확히 입력하세요");
+                            e.focus();
+                            return;
+                        }
+                    }
+
+                    $form.submit();
+                    break;
+            }
+        });
+
+
+    });
+</script>
+
+<body>
+    <div id="receipt">
+        <h3>영수증 확인을 위해 아래의 정보를 정확히 입력해 주시기 바랍니다.</h3>
+        <br>
+        <div id="receiptOption">
+            <input type="radio" name="option" value="구매자명+금액" checked>구매자명 + 금액
+            <input type="radio" name="option" value="이메일">이메일
+            <input type="radio" name="option" value="카드번호">카드번호
+        </div>
+        <form class="inner_table" name="frm1" action="https://www.w3schools.com/action_page.php" method="get">
+            <table>
+                <tr>
+                    <th>구매자명</th>
+                    <td><input type="text" class="longText" name="name" value=""></td>
+                </tr>
+                <tr>
+                    <th>결제금액</th>
+                    <td><input type="number" class="longText" name="price" value=""></td>
+                </tr>
+            </table>
+        </form>
+        <form class="inner_table hidden" name="frm2" action="https://www.w3schools.com/action_page.php" method="get">
+            <table>
+                <tr>
+                    <th>이메일</th>
+                    <td><input type="text" class="longText" name="email" value=""></td>
+                </tr>
+            </table>
+        </form>
+        <form class="inner_table hidden" name="frm3" action="https://www.w3schools.com/action_page.php" method="get">
+            <table>
+                <tr>
+                    <th>카드번호</th>
+                    <td>
+                        <input type="number" class="shortText" name="cardNum" value="">-
+                        <input type="number" class="shortText" name="cardNum" value="">-
+                        <input type="number" class="shortText" name="cardNum" value="">-
+                        <input type="number" class="shortText" name="cardNum" value="">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <br>
+        <input type="submit" id="btn" value="제출">
+    </div>
+</body>
+
+</html>

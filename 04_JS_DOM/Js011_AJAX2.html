@@ -1,0 +1,165 @@
+
+<!--xml 데이터 다루는 거-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>AJAX - XML</title>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+</head>
+<script>
+// 샘플 XML
+var xml_1 = 'JS/cd_catalog.xml'; //이 url로 리퀘스트할 것
+var xml_2 = 'JS/note.xml';
+</script> 
+<body>
+<h2>AJAX + XML 데이터 1</h2>
+
+<button type="button" onclick="loadCdData()">내 CD 목록</button>
+<button type="button" onclick="document.getElementById('demo').innerHTML = ''">지우기</button>
+<br><br>
+<table id="demo"></table>
+
+<script>
+//function loadCdData() {
+
+// 	// TODO
+//   let xhttp = new XMLHttpRequest(); //생성
+//   xhttp.onreadystatechange = function() {
+//   if(this.readyState == 4 && this.status == 200) {
+//     //alert(this.responseText);
+//     myFunction(this.responseXML); //DOM 구조로 변환된 XML
+//     }
+
+//   };
+
+//   xhttp.open("GET", xml_1, true);
+//   xhttp.send();
+
+
+// }
+
+
+// function myFunction(xmlDOM) {
+  
+// 	// TODO
+//   let table = [];
+//   table.push("<tr><th>Artist</th><th>Title</th></tr>");
+
+//   for(x of xmlDom.getElementsByTagName("CD")) {
+//     table.push(`
+//       <tr>
+//         <td>${x.getElementsByTagName('ARTIST')[0].firstChild.nodeValue}</td> //배열이 나오니까 0번째
+//         <td>${x.getElementsByTagName('TITLE')[0].firstChild.nodeValue}</td>
+//       </tr> //for문 돌면서 테이블 추가됨
+//     `);
+//   }
+
+
+//   document.getElementById('demo').innerHTML = table.join('\n');
+
+
+	
+
+function loadCdData() {
+
+let xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function(){
+  if(this.readyState == 4 && this.status == 200){
+    // alert(this.responseText);
+    myFunction(this.responseXML);    // DOM 변환된 XML
+  }
+};
+xhttp.open("GET", xml_1, true);
+xhttp.send();
+
+};
+function myFunction(xmlDOM) { //responsetext 넘어옴
+
+let table = [];
+table.push("<tr><th>Artist</th><th>Title</th></tr>");
+
+for(x of xmlDOM.getElementsByTagName("CD")){//텍스트에 접근하기 위함 firstchild
+table.push(`
+  <tr>
+    <td>${x.getElementsByTagName('ARTIST')[0].firstChild.nodeValue}</td> 
+    <td>${x.getElementsByTagName('TITLE')[0].firstChild.nodeValue}</td>
+  </tr>
+`);
+}
+
+document.getElementById('demo').innerHTML = table.join('\n');
+}
+
+
+
+
+</script>
+
+<hr>
+<h2>AJAX + XML 데이터 2</h2>
+
+<p><b>Status:</b> <span id="A1"></span></p>
+<p><b>Status text:</b> <span id="A2"></span></p>
+<p><b>Response:</b> <span id="A3"></span></p>
+
+<button onclick="loadNote(xml_2)">노트 데이터 가져오기</button>
+
+<script>
+
+
+	
+function loadNote(url) {
+// TODO
+let xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function(){
+  if(this.readyState == 4 && this.status == 200){
+     document.getElementById('A1').innerHTML = this.status; //200이 찍혀야 함
+     document.getElementById('A2').innerHTML = this.statusText;//response에 대한 텍스트값. 값이 ok, success인 문자
+     document.getElementById('A3').innerHTML = this.responseText; //xml text
+      
+
+
+    }
+  };
+
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+
+
+
+
+
+}
+</script>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

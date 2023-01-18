@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Selector2 - Pseudo class</title>
+<style>
+unvisited link */
+ /*a:link {  한번도 클릭한 적 없을 때의 상태
+    color: red;
+}*/
+
+/* visited link */
+/*a:visited { 한번이라도 방문하면 초록색
+    color: green;
+}*/
+
+/* mouse over link */
+ /*a:hover { 마우스 올라갔을 때 
+    color: hotpink;
+}*/
+
+/* selected link */
+/* a:active { 마우스 누른 시점
+    color: blue;
+} */
+
+/* :hover 마우스가 올라간 상태 */ /*순서 바꿔도 동작함. 얜 상태이기때문에 가능*/
+#demo1 {
+    background-color: green;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+#demo1:hover { /*마우스가 올라가면 블루. hover 빼면 중첩돼서 마지막꺼인 블루로 나옴*/ 
+    background-color: blue;
+}
+
+
+
+/* 마우스가 올라갔을때만 보여지게 하는 방법 */
+#demo2 {
+     /* 기본적으로 안보이게 하다가 */
+	display: none;
+    background-color: yellow;
+    color: black;
+    padding: 20px;
+}
+
+div:hover #demo2 { /*div에 마우스 올라가면 자손인 demo2*/
+    /* 마우스 올라가면 보이게 하기 */
+	display: block;
+}
+
+/* :first-child */
+#demo3 p:first-child {
+    color: blue;
+} 
+
+/* :nth-child() */
+#demo4 p:nth-child(2) { /*둘째만 선택*/
+    color: red;
+} 
+
+/* :focus 입력 상태 (포커스 상태(입력상태일때만)에만 동작)*/
+#demo5 input:focus {
+    background-color: yellow;
+}
+
+</style>
+
+</head>
+<!--
+CSS selector 에서 pseudo-class(슈도 클래스) 란?
+	: element 의) 특정 '상태(state' 
+	: ex) 마우스가 올라간 상태, 링크 방문 여부, 포커스 상태...
+	
+CSS selector 에서 pseudo-class 구문 
+	selector:pseudo-class {
+	    property:value;
+	}
+
+	참고 레퍼런스
+	https://www.w3schools.com/css/css_pseudo_classes.asp
+
+ -->
+<body>
+<p><b><a href="	https://www.w3schools.com/css/css_pseudo_classes.asp">This is a link</a></b></p>
+
+<hr>
+<div id="demo1">Mouse Over Me</div>
+<br>
+
+<hr>
+<div>마우스를 올려보세요
+  <p id="demo2">짜잔~</p>
+</div>
+
+<hr>
+<div id="demo3">
+	<p>paragraph1</p>
+	<p>paragraph2</p>
+	<p>paragraph3</p>
+	<div>
+		<p>paragraph4</p>
+		<p>paragraph5</p>
+	</div>
+</div>
+
+
+<hr>
+<div id="demo4">
+	<p>paragraph1</p>
+	<p>paragraph2</p>
+	<p>paragraph3</p>
+	<div>
+		<p>paragraph4</p>
+		<p>paragraph5</p>
+	</div>
+</div>
+
+
+<hr>
+<div id="demo5">
+<form>
+First name: <input type="text" name="firstname"><br>
+Last name: <input type="text" name="lastname">
+</form>
+</div>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>jQuery Event</title>
+<style>
+p {
+	background-color: cyan;
+	padding: 3px;
+}
+</style>
+</head>
+<!-- 
+	다양한 이벤트 함수들
+	1. 마우스 관련 이벤트
+		click   ( ↓,↑  / 왼쪽 버튼만)
+		dblclick   (왼쪽 버튼만  더블클릭하면) click 눌렀다 떼어질 때 발생되는 이벤트
+		mousedown  (↓ 모든 버튼) 눌릴 때
+		mouseup    (↑ 모든 버튼) 눌린 게 떼어질때
+		mouseenter 마우스 올려놓으면
+		mouseleave 마우스 올려져 있다가 나가면 
+		
+	2. 키보드 관련 이벤트
+		keydown
+		keypress   (keydown과 비슷: ALT, CTRL, SHIFT, ESC 등의 키에는 동작 안함 )
+		keyup 눌러진 게 떼어질 때
+		
+
+	3. 폼 관련 이벤트
+		submit
+		change : 저번 dom 과제에서 click 말고 change로 할 수 있음 으아 할 거 많다
+		focus
+		blur
+		
+	4. Document/Window 관련 이벤트
+		load
+		resize
+		scroll
+		unload
+		
+		
+	대부분의 jQuery '이벤트 함수'들이 위 DOM 이벤트들과 1:1 대응됨. (100%는 아님)
+	
+	
+	$("p").click(function(){
+		 action goes here!! 
+	});
+	
+	
+	jQuery 이벤트 함수의 매개변수가 '함수' 임에 유의
+
+	※ 크롬 개발자 도구에서 EventListener 확인 가능
+ -->
+ 
+ <!--
+ 이벤트 함수들
+ $(document).ready()    :  
+ 
+ -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ 
+<script>
+ 
+$(document).ready(function(){
+
+	// 클릭하면(click())사라지게 하기
+	// TODO
+	$("#p01").click(function() { //눌렀다 떼어질 때 발생
+		$(this).hide(); //this는 click된 element - #p01
+
+	});
+	
+	// 더블클릭하면(dblclick()) 
+	// 사라졌던게 나타나기 
+	// TODO 
+	$("#p02").dblclick(function(){
+		$("#p01").show(); //slideDown()
+	});
+	
+	// 마우스 올려놓으면 (mouseenter())
+	// TODO
+	$("#p03").mouseenter(function() {
+		$(this).html("<b>mouse가</b> 올려짐") //왜 html이 들어감? 9:47
+	})
+	
+	// 마우스 올려져 있다가 나가면 (mouseleave())
+	// TODO 
+	$("#p04").mouseleave(function() { //떼어질 때
+		$(this).text("<b>mouse</b> 삐짐") //html은 html 바꾸는 것 text는 text 바꾸는 것 뭐가 달라? <b>도 텍스트로 나옴
+	});
+	
+	
+	// 마우스 눌려지면 (mousedown())
+	// TODO
+	$("#p05").mousedown(function(){ //click이랑 다름 마우스 눌릴 때 동작
+		$(this).css("color", "red"); //css 변경하기
+	})
+	
+	// 마우스 눌렸다 떼지면 (mouseup())
+	// TODO
+	$("#p06").mouseup(function() { //떼어질 때 동작. click이랑 다른 점(). mouseup은  밖에서 드래그했다가 이 element에서 떼면 동작. click은 그 element에서 마우스를 눌렀다가 떼어야함
+		$("#img").attr("src", "../img/example_img_girl.jpg"); //attribute 변경하기
+	})
+	
+	// hover(func1, func2)  : mouseenter 와 mouseleave 롤 동시에 처리
+	// 마우스가 들어오면 배경색 노랑색으로
+	// 마우스가 나가면 배경색 cyan 색으로
+	// TODO
+	$("#p07").hover(function(){ //hover선택기는 요소 위에 마우스를 놓을 때 요소를 선택하는 데 사용됩니다 .
+		$(this).css("background-color", "yellow") //css property 문자열로 넣을 수 있다 -도 가능
+	}, function(){
+		$(this).css("background-color", "cyan")
+	});
+	
+	// focus() 되면
+	// 배경색을 노랑색으로 바꾸세요.
+	// TODO
+	$("#p08").focus(function() {
+		$(this).css("background", "yellow");
+		$(this).val("focus됨"); //val : 수정할 것(value)
+	})
+	
+	// blur() 되면
+	// 배경색을 다시 하얀색으로 바꾸기
+	// TODO
+	$("#p08").blur(function() {
+		$(this).css("background-color", "#fff");
+		$(this).val("blur됨");
+	})
+
+
+	//!!!!!!!!!!!!!!!!!!!이해 안가 event가 뭐야
+	//키 입력 관련 이벤트는 keydown 보다는 keyup을 추천한다
+	//키보드는 눌렸다 뗴어질 때 수행하게 함
+	$("#p08").keyup(function(event){; //매개변수로 이벤트가 넘어오게 한다. 이벤트 객체 받을 수 있음(js에서 event 함 거기에도 있음)
+		if(event.keyCode == 13) alert($(this).val()) //val이 비어있으면 입력된 값을 리턴?? 다시 확인 10:17
+		//엔터치면 동작
+	});
+
+
+
+
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!나중 a/s
+	$("#p08").change(function() {
+		$(this).append($(this).val())  //content 뒤에? append가 뭐야 나중에 a/s 해주신대  
+	})
+
+
+
+
+
+
+
+	//어떠한 이벤트든 이벤트 등록할 수 있는 것 on, off
+
+	// on(이벤트, func) 로 클릭이벤트를 9번에 등록
+	// on({이벤트1:func1, 이벤트2:func2, ... }) 여러 이벤트 핸들러 지정, 여러 이벤트 등록할 때 오브젝트로 넘김
+	// TODO
+	$("#p09").on("click", function(){
+		$(this).fadeOut(2000); //ms. 2초에 걸쳐서 사라짐
+	});
+
+	$("#p10").on({ //여러 이벤트 가능!
+		mouseenter: function(){
+			$(this).css("background-color", "limegreen");
+		},
+		mouseleave: function(){
+			$(this).css("background-color", "tomato");
+		},
+		click: function(){
+			$(this).css("background-color", "yellow");
+		},
+	});
+	
+    // TODO
+    
+
+	//f12 eventlistener에서 확인할 수 있다 제거 후 f12 안의 새로고침해야 함
+ 	// off() 는 해당 element 의 특정 이벤트 제거
+    // TODO off(event)?
+	$("#btnOff").click(function() {
+		$("#p10").off("click"); //click 이벤트 제거
+	})
+    
+  	// 대부분의 jQuery action함수들은 메소드 체이닝(chaining)됨 
+	// 메소드 체이닝 : 꼬리에 꼬리를 물어 할 수 있음
+  	// TODO
+	$("#p11")
+		.mouseenter(function() {
+			$(this).css("background-color", "salmon")
+		})
+		.mouseleave(function() {
+			$(this).css("background-color", "yellow")
+		})
+		.click(function() {
+			$(this).css("background-color", "red")
+		}) //메소드 계속 호출 가능
+
+		.text("p11 메소드 체이닝"); //이것도 가능
+
+		// hover(func1, func2) 얘는 마우스 들어올 때 나갈 때만? 
+}); 
+</script>
+ 
+<body>
+<p id="p01">p01 click</p>
+<p id="p02">p02 dblclick</p>
+<p id="p03">p03 mouseenter</p>
+<p id="p04">p04 mouseleave</p>
+<p id="p05">p05 mousedown</p>
+<p id="p06">p06 mouseup
+	<img id="img" src="">
+</p>
+<p id="p07">p07 hover</p>
+focus & blur: p08 <input id="p08"/></br>
+<p id="p09">p09 on</p>
+<p id="p10">p10 on</p>
+<p id="p11">p11 chaining</p>
+
+<button id="btnOff">btnOff 클릭 이벤트 제거</button>
+
+
+<!-- 
+	on(), off()
+	
+	과거에는
+	bind(), unbind() 함수		Deprecated 3.0
+	live(), die() 함수			Deprecated 1.7
+
+	참조: http://api.jquery.com/category/events/
+	
+	jQuery 도 deprecated 된 함수나 객체들 많다.  레퍼런스를 참조하자
+ -->
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

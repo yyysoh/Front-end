@@ -1,0 +1,368 @@
+body {
+    background-color: #898989;
+    margin: 0;
+    padding: 0; /*명시적으로 0인 거 해둠, 단위 확인하기*/
+    /* font-size: 0.75em; 상대적인 단위, 부모 기준으로. 0이외의 숫자는 무조건 단위 주기 */
+    /* line-height: 1.2em; */
+    color: #333;
+
+}
+
+
+#wrap {
+    /* outline: 2px solid yellow;   박스모델에 영향 안줘? 이거 나중에 지우기 테스트용  */
+    
+    width: 971px;
+    /* text-align: left; */
+    margin: 0; /*밖에 스크린과간격  0*/
+     margin-right: auto; /*왼, 오 : 화면이 커져도 작아져도 우측 좌측 margin이 동일-중앙정렬한 것 */
+    margin-left: auto;
+    
+    background-image: url(../images/shadow.png); /*테두리 부분 그림자. 바디 밑에 반투명 깔림. png는 알파값과 투명도지원 대신 압축이 안되어 큰걸로 쓰면 용량 엄청 커짐*/
+    background-repeat: repeat-y; /*저 그림자 이미지는 기본적으로 백그라운드해서 세로로 반복적으로 들어감 끄면 어떻게 될까 no-repeat : 한번만 들어감* repeat-y : y축에 한번 들어감*/
+    min-height: 1200px;    /*변경함!!!!!!!!!!!!!!!!! height*/
+}
+
+
+header {
+    /* outline: 2px solid orangered; */
+
+    height: 151px; /*아웃라인 살아남 명시적으로 줬기 때문에*/
+    margin: 0;
+    padding: 0;
+}
+
+
+
+#logo{
+    outline: 1px solid red;
+    float: left; /*float하는 순간 outline 짜부됨 height 사라짐*/
+    width: 265px;
+    margin: 40px 0 0 40px; /*네개 값의 margin 주면 시계 방향 위에서부터 오른쪽 아래 오른쪽 방향으로. 지금은 위, 왼쪽 40씩*/
+    min-height: 78px; /*78은 최대한 유지하자*/
+
+}
+
+
+
+
+nav#top_menu { /*nav는 컨테이너 역할 메뉴들이 처음에 왜 위에 떠있을까 플로팅해서 컨텐츠는 로고 주위에 있음*/
+    /* outline: 2px solid limegreen; */
+    
+    width: 600px;
+    float: right;
+    margin: 50px 20px 0 0; /*위 오른쪽*/
+}
+
+nav#top_menu ul {
+    list-style: none; /*li의 동그라미 사라짐*/
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    font-weight: 100;
+    color: #333;
+
+}
+
+
+nav#top_menu li {
+    /*li는 블록이다 근데 나란히해야하니까 인라인으로 변경*/
+    float: left; /*display해도 되고 float해도 인라인으로 붙음*/
+    margin: 0 5px /*거리 벌리기. 숫자 두개를 주면 처음껀 위아래, 두번째껀 좌우*/
+    /*인라인은 height padding 적용 안되지만 width는 됨 mergin도 마찬가지*/
+}
+
+
+nav#top_menu a{
+	display:block;
+	height: 20px;
+	padding:10px;
+	text-decoration: none;
+	color:#333;
+	
+}
+
+
+nav#top_menu a:hover {
+    background-image: url(../images/blue.gif); /*..은 부모. 다른 폴더에 있으니까 위로 올라가서 내려옴. 좌측 우측으로 (x,y축) 반복해서 전체가 보임 아래줄로만 하려면 y축으로 반복 안하면 됨*/
+    background-repeat: repeat-x; /*줄이 위로 감*/
+    background-position: bottom;
+
+}
+
+
+#login {
+    /* outline: 2px solid limegreen; */
+    
+    float: right;
+    margin: 20px 64px 0 0; /*위 오른쪽*/
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    word-spacing: 5px; /* '|' 글자 간의 간격*/
+}
+
+#login a {
+    text-decoration: none;
+    color: #333;
+
+}
+
+#login a:hover {
+    color: #F90;
+}
+
+.clear {
+    clear: both; /*left. right 둘 다. 중간에 해줘야함 */
+}
+
+
+
+
+
+#main_img{
+    width: 972px;
+    height: 320px;
+	background-image: url(../images/img_back.png);
+    background-size: 972px 320px;
+	background-repeat: norepeat;
+    margin: -9px 0 0 0px;
+	
+}
+
+
+
+article #solution {
+    /* outline: 1px solid red; */
+    margin: 20px 0 0 20px;
+    border: solid 1px rgb(228, 228, 228);
+    background-color: rgb(228, 228, 228);
+    width: 930px;
+    min-height: 250px;
+
+    
+}
+
+
+
+#hosting, #security, #payment {
+    width: 31%;
+    float: left;
+    padding: 10px;
+    border-right: 1px solid #ccc; /*오른쪽 선 생성*/
+}
+
+
+
+#hosting h3, #security h3, #payment h3 {
+    font-family: seo;
+    font-size: 17px;
+    font-weight: 28%;
+    color: #333;
+    margin: 10px 0 10px 80px;
+
+}
+
+
+
+#hosting p, #security p, #payment p { /*p와 h3 따로 만들어서 넣기!*/
+    font-family: seo;
+    font-size: 15px;
+    color: #333;
+    word-spacing: 3px;
+    margin: 0 0 0 80px;
+
+}
+
+
+
+#hosting img {
+    background-image: url(images/icon1.png);
+    background-repeat: no-repeat;
+    background-position: left 15px;
+    float: left;
+}
+
+
+
+#security img {
+    background-image: url(images/icon2.png);
+    background-repeat: no-repeat;
+    background-position: left 15px;
+    float: left;
+    margin: 0 0 0 3px;
+}
+
+#payment img {
+    background-image: url(images/icon3.png);
+    background-repeat: no-repeat;
+    background-position: left 15px;
+    float: left;
+    margin: 0 0 0 3px;
+}
+
+#sec_news, #news_notice {
+    float: left;
+    width: 420px;
+    margin: 15px 0 0 20px;
+}
+
+
+#sec_news h3, #news_notice h3 {
+    /* outline: 1px solid red; */
+    font-family: seo;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: normal;
+    width: 420px;
+    height: 24px;
+    background-image: url(../images/h3_back.jpg);
+	background-repeat: no-repeat;
+
+
+}
+
+
+#orange {
+    padding: 5px 0 0 23px;
+    color: orange;
+    /* margin: 0 0 20px 0;
+    float: left;
+    position: relative; */
+}
+
+
+#brown{
+    padding: 5px 0 0 23px;
+    color: brown;    
+}
+
+
+
+
+
+
+#sec_news dt {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    margin: 0 0 0 30px;
+    color: #F00;
+}
+
+#sec_news dt a {
+    color: #F00;
+    text-decoration: none;
+
+}
+
+#sec_news dt a:hover{
+    color: #F90;
+    text-decoration: underline;
+}
+
+
+#sec_news dd {
+    margin: 0 0 0 30px;
+    color: #333;
+}
+
+#sec_news dd a {
+    color: #333;
+    text-decoration: none;
+}
+
+#sec_news dd a:hover{
+    color: #F90;
+    text-decoration: underline;
+}
+
+
+
+
+
+#news_notice {
+    padding-left: 30px;
+}
+
+#news_notice table {
+    width: 400px;
+    border-collapse: collapse;
+    text-align: center;
+    
+}
+
+
+#news_notice td.contxt {
+    background-image: url(images/tr_back.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 15px;
+    text-align: left;
+    color: #333;
+}
+
+
+
+#news_notice a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+ 
+#news_notice a:hover {
+    text-decoration: none;
+    color: #F90;
+}
+
+
+
+footer {
+    float: left;
+    margin: 50px
+}
+
+footer hr {
+    margin-left: auto;
+    margin-right: auto;
+
+}
+ 
+footer #copy {
+    margin: 20px 0 0 10px;
+    width: 60%;
+    float: left;
+
+}
+
+footer #social {
+    float: right;
+    margin: 0px 30px 0 0;
+}
+
+
+footer img {
+    background-image: url("images/logo.gif");
+    background-repeat: no-repeat;
+    background-position: left 10px;
+    float: left;
+    margin: 15px 0 0 10px;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

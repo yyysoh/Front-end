@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>jQuery Intro</title>
+</head>
+
+<script>
+function hideP(){ //해당되는 p element를 사라지게 하기
+	
+	// TODO
+	 for(e of document.getElementsByTagName("p")) {
+	// 	e.addEventListener("click", function(){
+	// 		this.style.display = "none";
+	// 	});
+	
+	e.addEventListener("click", hideElement);
+	
+	}
+
+} // end hideP()
+
+function hideElement()
+{
+	// TODO
+	this.style.display = "none"; //정의할 때 this는 뭔지 몰라 실행할 때 알수있음
+	//이 this는 클릭한 p,
+}
+
+//함수나 변수 이름으로 $ 가능
+// TODO
+//$ = 100;
+// alert($);
+
+$ = function(){
+	document.write('<p>hello</p>');
+}
+$();
+
+//이름 없는 함수 정의하자마자 호출
+(function() {
+	document.write('<p>꺄르르르</p>');
+})();
+
+
+
+</script>
+
+<body onload="hideP()"> <!--해당 element 로딩이 끝나면 실행 되는 것!! onload가 그런 뜻 로딩 끝나면 저 hideP를 호출하겠다-->
+
+<p>없어지는 마술을 보여줄께.</p>
+<p>요것도.</p>
+<p>따다~~!</p>
+
+
+
+</body>
+</html>

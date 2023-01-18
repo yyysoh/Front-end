@@ -1,0 +1,382 @@
+@charset "UTF-8";
+
+
+/*기본 색상*/
+
+:root { /*css 변수 기능을 사용하여 색상값들을 변수로 선언하여 관리*/
+    --main-color: #5D9AB2;
+    --accent-color: #BF6A7A;
+    --dark-main-color: #2B5566;
+    --text-bright-color: #fff;
+    --icon-color: #fff;
+    --icon-bk-color: #ddd;
+    --large-width: 1000px;
+}
+
+/* 페이지 전체에 대한 기본 설정 */
+body {
+    margin: 0px;
+    font-family: '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
+}
+
+/* 콘텐츠A : 히어로 이미지 */
+.conA {
+    text-align: center;
+    background-image: linear-gradient(rgb(0,0,0,0.1), rgb(0,0,0,0.1)), url(img/fruits.jpg); /*conA에 넣기*/
+    /* linear-gradient 반투명 그라데이션 매개변수 두개 위에꺼 아래꺼 */
+    background-position: center;
+    background-size: cover; /*이미지 전체가 너비 전체에 잡힘 대신 잘림*/;
+    height: 100vh; /*100vh : 화면을 100으로 했을 때 100을 다 차지한 것*/
+    min-height: 450px; /*이것보다 작아지지 않는다*/
+    display: flex; /*flex container*/
+    align-items: center; /*세로 중앙 배치*/
+    justify-content: center; /*content 중앙 배치*/
+    color: var(--text-bright-color); /*변수로 지정한 컬러*/
+}
+
+.conA h1 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 15vw; /*vw*/
+    font-family: 'Mostserrat', sans-serif;
+    letter-spacing: 0.2em; /*우측으로 간격을 줌 좌측으로 치우칠 가능성이 있기에 앞에도 동일한 사이즈로 마진을 준다*/
+    margin-left: 0.2em;  /*이것도 같이*/
+}
+
+.conA p {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+.conA img {
+    width: 20%;
+}
+
+.conA a {
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--text-bright-color);
+    background-color: var(--accent-color);
+    padding: 10px 30px;
+    border: solid 3px currentColor; /*현재 글꼴과 같은 색상*/
+    border-radius: 6px;
+    margin-top: 20px; /*a 태그 인라인이라 적용안되니까 block으로*/
+    display: inline-block; /*margin top 적용 됨*/
+}
+
+.conA a:hover {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)); /*반투명 그라데이션 생김*/
+}
+
+@media (min-width: 768px) {
+    .conA h1 {
+        font-size: 115px; /*768 이상에선 화면이 커지든 작아지든 115로 고정*/
+    }
+
+    .conA p {
+        font-size: 24px;
+    }
+}
+
+
+
+/*컨텐츠B*/
+.conB .lifelog .phone .sns {
+    text-align: center;
+    display: inline-block;
+}
+
+.conB h1 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+
+.conB p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.8; /*줄높이 : font-size의 1.8배*/
+    opacity: 0.8; /*투명 정도 1은 불투명*/
+}
+
+.conB a {
+    text-decoration: none; /*선 셍성*/
+    color: #5D9AB2;
+    color: var(--main-color);
+}
+
+.conB a:hover {
+    text-decoration: underline;
+}
+
+
+.conB .icon {
+    font-size:  40px;
+    width: 2em; /*폭 글꼴 크기의 2배*/
+    line-height: 2em; /*높이 글꼴 크기의 2배*/
+
+    color: #fff;
+    color: var(--icon-color);
+    background-color: #ddd;
+    background-color: var(--icon-bk-color);
+
+    border-radius: 50%;
+    text-align: center;
+
+    display: inline-block; /*아래의 마진을 적용하기 위해서. span은 inline*/
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+@media (min-width: 768px) { /*768 이상 pc*/
+    /*flexible box 기능으로 가로 정렬*/
+    .conB .container { /*부모를 flex로 정렬*/
+        display: flex;
+        max-width: 1000px;
+        max-width: var(--large-width);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .conB .text {
+        flex: 1; /*1:1:1 비율 설정*/
+    }
+
+    .conC .container {
+        display: flex; /*부모를 flex로 지정*/
+        /*컨텐츠 B와 너비 맞추기*/
+        max-width: 1000px;
+        max-width: var(--large-width);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /*이미지와 글자 3:2 비율*/
+    .conC .photo {
+        flex: 3;
+    }    
+
+    .conC .text {
+        flex: 2;
+        padding: 50px; 
+    }
+
+    .conD .photo {
+        flex: 3;
+    }
+
+    .conD .text {
+        flex: 2;
+        padding: 50px;
+    }
+
+    .conD .container {
+        display: flex;
+        flex-direction: row-reverse;
+        max-width: 1000px;
+        max-width: var(--large-width);
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 40px;
+        padding-bottom: 40px
+    }
+
+    .conD .photo {
+        flex: 0 0 400px;
+
+    }
+
+    .conD .text {
+        flex: 1;
+        padding: 50px;
+    }
+}
+
+
+
+
+
+.conB .container {
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+
+.conB .text {
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 60px;
+}
+
+.conB h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+
+
+
+/*콘텐츠 C*/
+
+.conC h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+
+.conC p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.8; /*줄높이*/
+    opacity: 0.8;
+}
+
+.conC a {
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--text-bright-color);
+    background-color: var(--accent-color);
+    padding: 10px 30px;
+    border: solid 3px currentColor; /*현재 글꼴과 같은 색상*/
+    border-radius: 6px;
+    margin-top: 20px; /*a 태그 인라인이라 적용안되니까 block으로*/
+    display: inline-block; /*margin top 적용 됨*/
+    box-shadow: 0 0 0 1px #888; /*실선 1px 두께 그림자 (크롬에서는 box shadow에 변수 지정 불가)*/
+}
+
+
+.conC .a:hover {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+    );
+}
+
+
+
+.conC {
+    background-color: #5D9AB2;
+    background-color: var(--main-color);
+    color: #fff;
+    color: var(--text-bright-color);
+}
+
+
+.conC h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.conC .photo {
+    min-height: 200px; /*아무것도 없는 div라 보이게 하려면 min-height 지정*/
+    background-image: url(img/note.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.conC .text{
+    padding: 20px; /*글자 주변 여백*/
+}
+
+
+
+
+
+/*콘텐츠 D*/
+.conD {
+
+
+}
+
+.conD .text{
+    padding: 20px;
+}
+
+.conD h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.conD p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.8;
+    opacity: 0.8;
+}
+
+
+.conD a {
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--text-bright-color);
+    background-color: var(--accent-color);
+    padding: 10px 30px;
+    border: solid 3px currentColor; /*현재 글꼴과 같은 색상*/
+    border-radius: 6px;
+    margin-top: 20px; /*a 태그 인라인이라 적용안되니까 block으로*/
+    display: inline-block; /*margin top 적용 됨*/
+    box-shadow: 0 0 0 1px #888; /*실선 1px 두께 그림자 (크롬에서는 box shadow에 변수 지정 불가)*/
+}
+
+
+.conD .a:hover {
+    background-image: linear-gradient( /*커서 올라가면 조금 밝게 보임*/
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+    );
+}
+
+
+.conD .photo {
+    min-height: 200px; /*아무것도 없는 div라 보이게 하려면 min-height 지정*/
+    background-image: url(img/life.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+
+.conD .container {
+    padding-top: 2px;
+}
+
+
+
+
+
+/*footer*/
+footer {
+    background-color: #285566;
+    background-color: var(--dark-main-color);
+    color: #fff;
+    color: var(--text-bright-color);
+}
+
+footer .container {
+    padding
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

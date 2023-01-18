@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery DOM연습</title>
+	<style>
+		table {
+			width: 500px;
+		}
+
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			padding: 5px;
+			font-size: 1.2em;
+		}
+
+		th {
+			width: 50%;
+		}
+
+		th,
+		td {
+			padding: 10px;
+		}
+
+		td {
+			background-color: orange;
+		}
+
+		span,
+		input {
+			display: inline-block;
+			width: 100%;
+			font-size: 1.2em;
+			padding: 2px;
+			margin: 0;
+		}
+
+
+		/*평상시엔 안보임!*/
+		#table1 input {
+			border: none;
+			display: none;
+		}
+	</style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	//Js009_DOM5_practice1.html의 동작을 jQuery 로 작성해보세요.
+
+
+	$(document).ready(function () {
+		// $("#table1 span").click(function() {
+		// 	let txt = $(this).val().trim();
+		// 	$(this).hide();
+		// 	let input = $(this).siblings("input"); 
+		// 	input.show();
+		// 	// input.text(txt);
+		// 	input.focus();
+		// });
+
+
+		$("span:first").click(function() {
+			let txt = $(this).val().trim();
+			$(this).hide()
+			//let input = $(this).siblings("input"); 
+			$("input").show();
+			input.show(); //두개 중에 어떤건지 모르니까
+			input.focus();
+		});
+		$("span:last").click(function() {
+			let txt = $(this).val().trim();
+			$(this).hide()
+			$("input").show();
+			$("input").focus();
+		});
+	
+	
+
+	function end(e) { //e가 input, input인 this가 넘어왔으니까
+		let txt = e.val().trim();
+		e.hide();
+		let span = e.siblings("span");
+		span.show();
+		span.text(txt); //이거 안하면 입력하기 전의 값으로 돌아감
+
+	}
+
+		$("#table1 input").on({
+		keyup: function(event) {
+			if (event.keyCode == 13) end($(this));
+		},
+		focusout: function() {
+			end($(this));
+		},
+	})
+
+}); //end
+
+
+
+
+</script>
+
+<body>
+	<table id="table1">
+		<tr>
+			<th>이름</th>
+			<th>아이디</th>
+		</tr>
+		<tr>
+			<td>
+				<span>홍길동</span>
+				<input type="text">
+			</td>
+			<td>
+				<span>Mr.Hong</span>
+				<input type="text">
+			</td>
+		</tr>
+	</table>
+	</div>
+
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Responsive Images</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 
+https://www.w3schools.com/css/css_rwd_images.asp
+https://www.w3schools.com/howto/howto_css_image_responsive.asp
+ -->
+<style>
+
+
+/* image 가  확대축소 되게 하려면  */
+.responsive1 {
+    /* TODO */
+    /* 이미지 커질 때 같이 커지게 하고 싶다 */
+    width: 100%; /*컨테이너 크기 대비 100%*/
+    height: auto; /*가로 세로 비율 유지가 되어 화질이 깨지지 않는다. 이거 안하면 가로가 너무 늘어남*/
+}
+
+/* 화면이 커져도 이미지 '원래 크기' 이상 늘어나지 않게 하기 */
+.responsive2 {
+    /* TODO */
+    max-width: 100%; /*이미지 원래 크기의 100퍼센트까지란 의미로 위의 width와 다름*/
+    height: auto;
+}
+
+/* image 를 특정 maximum 사이즈 이내로 국한시킬 경우 */
+.responsive3 {
+    /* TODO */
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+}
+
+</style>
+</head>
+<body>
+
+<h2>Responsive Images</h2>
+
+
+<p>브라우저 윈도우를 확대 축소 시켜서 확인해보세요</p>
+
+
+<img src="../img/img_nature.jpg" alt="Nature" class="responsive1" width="600" height="400">
+
+<br>
+
+<img src="../img/img_nature.jpg" alt="Nature" class="responsive2" width="600" height="400">
+
+<br>
+
+<img src="../img/img_nature.jpg" alt="Nature" class="responsive3" width="600" height="400">
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

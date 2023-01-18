@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Form 만들기 과제</title>
+
+<style>
+
+	section {
+	border:1px 
+	solid rgb(72, 72, 72); 
+	font-size: 0.7em;
+	padding:10px;	
+	width: 70%; 
+	margin-left:auto;margin-right:auto;
+	
+	}
+
+
+
+	footer {
+		width: 70%; 
+		margin-left:auto;margin-right:auto;
+		font-size: 0.7em;
+	
+	}
+
+	nav {
+		width: 70%; 
+		margin-left:auto;margin-right:auto;
+		font-size: 0.7em;
+		font-family:Gulimche;
+	
+	}
+
+	span {
+	
+		font-size: 0.5em;
+		
+	}
+
+	input[type=checkbox] {
+		width:10px; height:20px;
+	}
+
+
+
+
+</style>
+
+
+</head>
+<!-- 
+	https://docs.google.com/presentation/d/1TTkjsf5v4PRErwmT2wXJ8VVM_L1pUglJbYSLLdEdQ-A/edit#slide=id.p
+
+ -->
+<body>
+
+
+<nav>
+<h1>수신자 정보 입력</h1>
+</nav>
+
+<section>
+
+주문자정보 : 비회원으로 상품구매 시 반드시 본인인증을 하셔야 합니다
+			<button type="button">휴대폰인증</button>
+			<button type="button">아이핀인증</button><br>
+
+
+주소 : <input type="text" name="address" size="10" disabled> 
+	  <button type="button" onclick="prompt('주소 입력')">주소 찾기</button><br>
+	  <input type="text" name="address" size="60" disabled><br>
+	  <input type="text" name="address" size="60"><br>
+
+휴대전화 : <select name="number" size="1">
+			<option value="010" selected>010</option>
+			<option value="010">070</option>
+			<option value="010">031</option>
+		  </select>
+	      - <input type="number" name="number" size="10">
+		  - <input type="number" name="number" size="10">
+		  <span>
+			 <input type="checkbox" name="number" value="check" checked>SMS수신동의
+		  </span>
+		  <br>
+이메일 : <input type="email" name="email" size="10"> @ <input type="email" name="email" size="10"> 
+		<select name="email" size="1">
+			<option value="naver.com">naver.com</option>
+			<option value="daum.net">daum.net</option>
+			<option value="google.com">google.com</option>
+		</select>
+</section>
+
+
+<footer>
+*SK플래닛(주)는 통신판매중개자로서 통신판매의 당사자가 아니며, 개별판매자가 등록한 상품정보 및 거래에 대해 SK플래닛(주)는 일체의 책임을 지지 않습니다.
+</footer>
+
+<br>
+<nav>
+<h1>배송지 정보 입력</h1>
+</nav>
+<section>
+배송지선택 <button type="button">주문자 정보와 동일</button><br>
+받으시는 분 <input type="text" name="name" size="10"><br>
+주소 <input type="text" name="address" size="10" disabled>
+<span>
+	  <button type="button" onclick="prompt('주소 입력')">주소 찾기</button>
+</span>
+	<input type="checkbox" name="delivery" value="delivery">배송지 입력<br>
+	  <input type="text" name="address" size="60"disabled><br>
+	  <input type="text" name="address" size="60"><br>
+휴대전화 <select name="number" size="1">
+		<option value="010" selected>010</option>
+		<option value="010">070</option>
+		<option value="010">031</option>
+	  </select>
+	  - <input type="number" name="number" size="10">
+	  - <input type="number" name="number" size="10">
+	  <span>
+		<input type="checkbox" name="Reliefnumber" value="check" checked>안심번호 사용(무료) <input type="button" value="?" onClick="alert('도움말 솰라솰라')">
+	 	 <!--onClick="window.open('http://google.com')"-->
+	  	<input type="checkbox" name="number" value="homecheck"> 집전화 추가 입력
+	 </span><br>
+배송사요구사항 <textarea name="message" id="message" cols="30" rows="1"></textarea> (0자/50자)<br>
+	  		*특정한 배송일을 지정하고자 할 경우 판매자와 연락하여 배송일을 확인해주시기 바랍니다
+
+</section>
+
+<br>
+<nav>
+<h1>결제 정보 입력</h1>
+</nav>
+<section>
+신용카드 <input type="radio" name="card" value="credi" checked>신용카드(일반)
+<input type="radio" name="card" value="Corporated">신용카드(법인)
+<input type="radio" name="card" value="overseas">해외발급카드<br>
+<input type="radio" name="card" value="nobankbook">무통장입금
+<input type="radio" name="card" value="account">실시간계좌이체<br>
+</article>
+
+<article>
+카드선택 : <select name="choice" size="1">
+		  <option value="0">선택하세요</option>
+		  <option value="kb">국민은행</option>
+		  <option value="shinhan">신한은행</option>
+		  </select> 
+		  <br>
+할부방식 : <select name="installment" size="1">
+	      <option value="0">일시불</option>
+		  <option value="1">1개월(무이자)</option>
+		  <option value="2">2개월(무이자)</option>
+		  <option value="3">3개월(무이자)</option>
+		  <option value="4">4개월(무이자)</option>
+		  <option value="5">5개월(무이자)</option>
+		  </select> 
+		  <br>
+
+결제안내 : <button type="button">간편결제안내</button>
+		 <button type="button">공인인증안내</button>
+		 <button type="button">안전결제안내</button>
+		 <button type="button">안심클릭안내</button>
+		 <button type="button">해외발급카드안내</button>
+
+</section>
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
